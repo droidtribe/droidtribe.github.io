@@ -305,6 +305,12 @@ list.addEventListener('click', (event) => {
   ].indexOf(button);
   showPhoto();
   lightbox.showModal();
+  if (embedded) {
+    window.parent.postMessage(
+      { source: 'droidtribe-static', type: 'lightbox-open' },
+      '*'
+    );
+  }
 });
 document
   .querySelector('[data-close-lightbox]')
@@ -412,6 +418,13 @@ if (embedded) {
     }
     if (event.data.type === 'request-height') {
       sendEmbedHeight();
+      return;
+    }
+    if (
+      event.data.type === 'viewport' &&
+      typeof event.data.top === 'number'
+    ) {
+      root.style.setProperty('--embed-modal-top', `${event.data.top}px`);
       return;
     }
     if (

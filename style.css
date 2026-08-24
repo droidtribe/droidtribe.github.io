@@ -852,7 +852,12 @@ a.speaker:hover {
   padding-top: var(--space-8);
 }
 .is-embedded .lightbox {
+  position: absolute;
+  inset: auto auto auto 50%;
+  top: var(--embed-modal-top, 50vh);
+  margin: 0;
   max-height: calc(100vh - 2rem);
+  transform: translate(-50%, -50%);
 }
 .is-embedded .lightbox-stage {
   height: min(62vh, 38rem);
