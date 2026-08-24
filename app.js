@@ -288,6 +288,12 @@ const movePhoto = (direction) => {
   activePhoto = (activePhoto + direction + gallery.length) % gallery.length;
   showPhoto();
 };
+const resetLightboxScroll = () => {
+  lightbox.scrollTop = 0;
+  requestAnimationFrame(() => {
+    lightbox.scrollTop = 0;
+  });
+};
 list.addEventListener('click', (event) => {
   const button = event.target.closest('.photo-button');
   if (!button) return;
@@ -309,6 +315,7 @@ document
     event.preventDefault();
     event.stopPropagation();
     movePhoto(-1);
+    resetLightboxScroll();
   });
 document
   .querySelector('[data-lightbox-next]')
@@ -316,12 +323,14 @@ document
     event.preventDefault();
     event.stopPropagation();
     movePhoto(1);
+    resetLightboxScroll();
   });
 lightboxDots.addEventListener('click', (event) => {
   const dot = event.target.closest('.lightbox-dot');
   if (!dot) return;
   activePhoto = [...lightboxDots.querySelectorAll('.lightbox-dot')].indexOf(dot);
   showPhoto();
+  resetLightboxScroll();
 });
 lightbox.addEventListener('click', (event) => {
   if (event.target === lightbox) lightbox.close();
@@ -377,6 +386,19 @@ if (embedded) {
   document.querySelectorAll('a[href$=".html"]').forEach((link) => {
     link.search = '?embed=1';
   });
+  const sendEmbedHeight = () => {
+    window.parent.postMessage(
+      {
+        source: 'droidtribe-static',
+        type: 'height',
+        height: Math.max(
+          document.documentElement.scrollHeight,
+          document.body.scrollHeight
+        )
+      },
+      '*'
+    );
+  };
   const allowedParentOrigins = new Set([
     'https://hadiyarajesh.com',
     'http://localhost:3001'
@@ -384,25 +406,23 @@ if (embedded) {
   window.addEventListener('message', (event) => {
     if (
       !allowedParentOrigins.has(event.origin) ||
-      event.data?.source !== 'hadiyarajesh-site' ||
-      event.data?.type !== 'theme' ||
-      !['light', 'dark'].includes(event.data.theme)
+      event.data?.source !== 'hadiyarajesh-site'
     ) {
       return;
     }
-    setTheme(event.data.theme, false);
+    if (event.data.type === 'request-height') {
+      sendEmbedHeight();
+      return;
+    }
+    if (
+      event.data.type === 'theme' &&
+      ['light', 'dark'].includes(event.data.theme)
+    ) {
+      setTheme(event.data.theme, false);
+    }
   });
-  const sendEmbedHeight = () => {
-    window.parent.postMessage(
-      {
-        source: 'droidtribe-static',
-        type: 'height',
-        height: document.documentElement.scrollHeight
-      },
-      '*'
-    );
-  };
   new ResizeObserver(sendEmbedHeight).observe(document.body);
+  new ResizeObserver(sendEmbedHeight).observe(document.documentElement);
   window.addEventListener('load', sendEmbedHeight);
   sendEmbedHeight();
 }

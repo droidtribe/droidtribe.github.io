@@ -189,7 +189,7 @@ h1 {
 }
 h1 em {
   font-family: var(--font-display);
-  font-style: normal;
+  font-style: italic;
   font-weight: 600;
   letter-spacing: -0.05em;
   white-space: nowrap;
@@ -743,7 +743,8 @@ a.speaker:hover {
   position: relative;
   margin: 0 var(--space-5);
   overflow: hidden;
-  aspect-ratio: 3 / 2;
+  height: min(62vh, 38rem);
+  aspect-ratio: auto;
   border-radius: var(--radius-sm);
   background: var(--color-surface-alt);
 }
@@ -762,11 +763,18 @@ a.speaker:hover {
   height: 2.6rem;
   padding: 0;
   transform: translateY(-50%);
+  transition: none;
   border: 0;
   border-radius: 50%;
   background: var(--color-lightbox-control);
   color: var(--color-on-accent);
   cursor: pointer;
+  touch-action: manipulation;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.lightbox-nav:active {
+  transform: translateY(-50%);
 }
 .lightbox-nav svg {
   width: 1.25rem;
@@ -812,6 +820,43 @@ a.speaker:hover {
 .is-embedded .footer,
 .is-embedded .skip-link {
   display: none;
+}
+.embed-back-link-wrap {
+  display: none;
+}
+.embed-back-link {
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--color-muted);
+  font: 500 0.7rem/1 var(--font-mono);
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.embed-back-link svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+.is-embedded,
+.is-embedded body {
+  overflow: hidden;
+}
+.is-embedded .embed-back-link-wrap {
+  display: block;
+  padding-top: var(--space-8);
+}
+.is-embedded .embed-back-link {
+  display: inline-flex;
+}
+.is-embedded .hero-grid {
+  padding-top: var(--space-8);
+}
+.is-embedded .lightbox {
+  max-height: calc(100vh - 2rem);
+}
+.is-embedded .lightbox-stage {
+  height: min(62vh, 38rem);
+  aspect-ratio: auto;
 }
 .legal-page {
   min-height: calc(100vh - 5.5rem);
