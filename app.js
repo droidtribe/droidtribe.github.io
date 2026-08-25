@@ -227,129 +227,174 @@ const speakerMarkup = ([name, topic, href, photo]) => {
     ? `<a class="speaker" href="${href}" target="_blank" rel="noreferrer">${content}</a>`
     : `<div class="speaker">${content}</div>`;
 };
+// Split on the middot so a narrow card breaks between day and time,
+// never in the middle of "11 AM - 5 PM".
+const dateMarkup = (value) =>
+  value
+    .split(' · ')
+    .map((part) => `<span class="meetup-date-part">${part}</span>`)
+    .join('<span class="meetup-date-sep" aria-hidden="true">·</span>');
 const photoMarkup = (photo, meetup) =>
   `<button class="photo-button" type="button" data-photo="${img(photo)}" data-alt="Meetup #${meetup.number} photo" aria-label="Open Meetup #${meetup.number} photo"><img src="${img(photo)}" alt="Meetup #${meetup.number} photo" loading="lazy" /></button>`;
+let refitLightbox = () => {};
 if (list) {
-list.innerHTML = meetups
-  .map(
-    (meetup, index) =>
-      `<article class="meetup ${index === 0 ? 'is-open' : ''}"><span class="meetup-mark" aria-hidden="true">${meetup.number}</span><div class="meetup-card"><button class="meetup-trigger" type="button" aria-expanded="${index === 0}" aria-controls="meetup-${meetup.number}"><span class="meetup-title-row"><span class="meetup-title">Meetup #${meetup.number}</span><span class="city-chip">${mapPin} ${meetup.city}</span></span><span class="meetup-meta"><span class="meetup-date">${meetup.date}</span><span class="chevron" aria-hidden="true">⌄</span></span></button><div class="venue">${mapPin}<span class="venue-label">Venue</span><a href="${meetup.venue}" target="_blank" rel="noreferrer">${meetup.city}</a></div><div class="meetup-panel" id="meetup-${meetup.number}" ${index === 0 ? '' : 'hidden'}><div><p class="panel-label">Speakers</p><div class="speaker-grid">${meetup.speakers.map(speakerMarkup).join('')}</div></div><div><p class="panel-label">Photos</p><div class="photo-strip">${meetup.photos.map((photo) => photoMarkup(photo, meetup)).join('')}</div></div>${meetup.recording ? `<a class="recording-link" href="${meetup.recording}" target="_blank" rel="noreferrer">${recordingIcon}<span>Watch recordings</span></a>` : ''}</div></div></article>`
-  )
-  .join('');
-
-const setMeetupOpen = (meetup, shouldOpen) => {
-  document.querySelectorAll('.meetup').forEach((node) => {
-    node.classList.remove('is-open');
-    node
-      .querySelector('.meetup-trigger')
-      .setAttribute('aria-expanded', 'false');
-    node.querySelector('.meetup-panel').hidden = true;
-  });
-  if (shouldOpen) {
-    meetup.classList.add('is-open');
-    meetup
-      .querySelector('.meetup-trigger')
-      .setAttribute('aria-expanded', 'true');
-    meetup.querySelector('.meetup-panel').hidden = false;
-  }
-};
-
-list.addEventListener('click', (event) => {
-  const card = event.target.closest('.meetup-card');
-  if (!card) return;
-  const interactiveChild = event.target.closest('a, .photo-button, .recording-link');
-  if (interactiveChild) return;
-  const meetup = card.closest('.meetup');
-  setMeetupOpen(meetup, !meetup.classList.contains('is-open'));
-});
-
-const lightbox = document.querySelector('#lightbox');
-const lightboxImage = document.querySelector('#lightbox-image');
-const lightboxCount = document.querySelector('#lightbox-count');
-const lightboxDots = document.querySelector('#lightbox-dots');
-let gallery = [];
-let activePhoto = 0;
-const showPhoto = () => {
-  const item = gallery[activePhoto];
-  lightboxImage.src = item.src;
-  lightboxImage.alt = item.alt;
-  lightboxCount.textContent = `${activePhoto + 1} / ${gallery.length}`;
-  lightboxDots.innerHTML = gallery
+  list.innerHTML = meetups
     .map(
-      (_, index) =>
-        `<button type="button" class="lightbox-dot${index === activePhoto ? ' is-active' : ''}" role="tab" aria-label="Show photo ${index + 1}" aria-selected="${index === activePhoto}"></button>`
+      (meetup, index) =>
+        `<article class="meetup ${index === 0 ? 'is-open' : ''}"><span class="meetup-mark" aria-hidden="true">${meetup.number}</span><div class="meetup-card"><button class="meetup-trigger" type="button" aria-expanded="${index === 0}" aria-controls="meetup-${meetup.number}"><span class="meetup-title-row"><span class="meetup-title">Meetup #${meetup.number}</span><span class="city-chip">${mapPin} ${meetup.city}</span></span><span class="meetup-meta"><span class="meetup-date">${dateMarkup(meetup.date)}</span><span class="chevron" aria-hidden="true">⌄</span></span></button><div class="venue">${mapPin}<span class="venue-label">Venue</span><a href="${meetup.venue}" target="_blank" rel="noreferrer">${meetup.city}</a></div><div class="meetup-panel" id="meetup-${meetup.number}" ${index === 0 ? '' : 'hidden'}><div><p class="panel-label">Speakers</p><div class="speaker-grid">${meetup.speakers.map(speakerMarkup).join('')}</div></div><div><p class="panel-label">Photos</p><div class="photo-strip">${meetup.photos.map((photo) => photoMarkup(photo, meetup)).join('')}</div></div>${meetup.recording ? `<a class="recording-link" href="${meetup.recording}" target="_blank" rel="noreferrer">${recordingIcon}<span>Watch recordings</span></a>` : ''}</div></div></article>`
     )
     .join('');
-  document.querySelector('[data-lightbox-prev]').disabled = gallery.length < 2;
-  document.querySelector('[data-lightbox-next]').disabled = gallery.length < 2;
-};
-const movePhoto = (direction) => {
-  if (gallery.length < 2) return;
-  activePhoto = (activePhoto + direction + gallery.length) % gallery.length;
-  showPhoto();
-};
-const resetLightboxScroll = () => {
-  lightbox.scrollTop = 0;
-  requestAnimationFrame(() => {
-    lightbox.scrollTop = 0;
-  });
-};
-list.addEventListener('click', (event) => {
-  const button = event.target.closest('.photo-button');
-  if (!button) return;
-  gallery = [
-    ...button.closest('.photo-strip').querySelectorAll('.photo-button')
-  ].map((node) => ({ src: node.dataset.photo, alt: node.dataset.alt }));
-  activePhoto = [
-    ...button.parentElement.querySelectorAll('.photo-button')
-  ].indexOf(button);
-  showPhoto();
-  lightbox.showModal();
-  if (embedded) {
-    window.parent.postMessage(
-      { source: 'droidtribe-static', type: 'lightbox-open' },
-      '*'
+
+  const setMeetupOpen = (meetup, shouldOpen) => {
+    document.querySelectorAll('.meetup').forEach((node) => {
+      node.classList.remove('is-open');
+      node
+        .querySelector('.meetup-trigger')
+        .setAttribute('aria-expanded', 'false');
+      node.querySelector('.meetup-panel').hidden = true;
+    });
+    if (shouldOpen) {
+      meetup.classList.add('is-open');
+      meetup
+        .querySelector('.meetup-trigger')
+        .setAttribute('aria-expanded', 'true');
+      meetup.querySelector('.meetup-panel').hidden = false;
+    }
+  };
+
+  list.addEventListener('click', (event) => {
+    const card = event.target.closest('.meetup-card');
+    if (!card) return;
+    const interactiveChild = event.target.closest(
+      'a, .photo-button, .recording-link'
     );
-  }
-});
-document
-  .querySelector('[data-close-lightbox]')
-  .addEventListener('click', () => lightbox.close());
-document
-  .querySelector('[data-lightbox-prev]')
-  .addEventListener('click', (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    movePhoto(-1);
+    if (interactiveChild) return;
+    const meetup = card.closest('.meetup');
+    setMeetupOpen(meetup, !meetup.classList.contains('is-open'));
+  });
+
+  const lightbox = document.querySelector('#lightbox');
+  const lightboxImage = document.querySelector('#lightbox-image');
+  const lightboxStage = document.querySelector('.lightbox-stage');
+  const lightboxFrame = document.querySelector('.lightbox-frame');
+  const lightboxCount = document.querySelector('#lightbox-count');
+  const lightboxDots = document.querySelector('#lightbox-dots');
+  let gallery = [];
+  let activePhoto = 0;
+  // Shrink the stage to the photo's own shape (never past the CSS cap) so wide
+  // photos sit flush instead of floating in letterbox bars. The height only ever
+  // grows while one gallery is open, so paging never makes the dialog jump around.
+  let stageHeight = 0;
+  const fitStage = () => {
+    if (!lightboxStage || !lightboxFrame) return;
+    const { naturalWidth, naturalHeight } = lightboxImage;
+    const cap = parseFloat(getComputedStyle(lightboxStage).maxHeight);
+    const available = lightboxFrame.clientWidth;
+    if (!naturalWidth || !naturalHeight || !cap || !available) return;
+    const ratio = naturalWidth / naturalHeight;
+    stageHeight = Math.min(cap, Math.max(stageHeight, available / ratio));
+    lightboxStage.style.setProperty(
+      '--lightbox-stage-height',
+      `${Math.round(stageHeight)}px`
+    );
+    lightboxStage.style.setProperty(
+      '--lightbox-stage-width',
+      `${Math.round(Math.min(available, stageHeight * ratio))}px`
+    );
+  };
+  lightboxImage.addEventListener('load', fitStage);
+  window.addEventListener('resize', () => {
+    stageHeight = 0;
+    fitStage();
+  });
+  refitLightbox = fitStage;
+  const showPhoto = () => {
+    const item = gallery[activePhoto];
+    lightboxImage.src = item.src;
+    lightboxImage.alt = item.alt;
+    if (lightboxImage.complete) fitStage();
+    lightboxCount.textContent = `${activePhoto + 1} / ${gallery.length}`;
+    lightboxDots.innerHTML = gallery
+      .map(
+        (_, index) =>
+          `<button type="button" class="lightbox-dot${index === activePhoto ? ' is-active' : ''}" role="tab" aria-label="Show photo ${index + 1}" aria-selected="${index === activePhoto}"></button>`
+      )
+      .join('');
+    document.querySelector('[data-lightbox-prev]').disabled =
+      gallery.length < 2;
+    document.querySelector('[data-lightbox-next]').disabled =
+      gallery.length < 2;
+  };
+  const movePhoto = (direction) => {
+    if (gallery.length < 2) return;
+    activePhoto = (activePhoto + direction + gallery.length) % gallery.length;
+    showPhoto();
+  };
+  const resetLightboxScroll = () => {
+    lightbox.scrollTop = 0;
+    requestAnimationFrame(() => {
+      lightbox.scrollTop = 0;
+    });
+  };
+  list.addEventListener('click', (event) => {
+    const button = event.target.closest('.photo-button');
+    if (!button) return;
+    gallery = [
+      ...button.closest('.photo-strip').querySelectorAll('.photo-button')
+    ].map((node) => ({ src: node.dataset.photo, alt: node.dataset.alt }));
+    activePhoto = [
+      ...button.parentElement.querySelectorAll('.photo-button')
+    ].indexOf(button);
+    stageHeight = 0;
+    showPhoto();
+    lightbox.showModal();
+    if (embedded) {
+      window.parent.postMessage(
+        { source: 'droidtribe-static', type: 'lightbox-open' },
+        '*'
+      );
+    }
+  });
+  document
+    .querySelector('[data-close-lightbox]')
+    .addEventListener('click', () => lightbox.close());
+  document
+    .querySelector('[data-lightbox-prev]')
+    .addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      movePhoto(-1);
+      resetLightboxScroll();
+    });
+  document
+    .querySelector('[data-lightbox-next]')
+    .addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      movePhoto(1);
+      resetLightboxScroll();
+    });
+  lightboxDots.addEventListener('click', (event) => {
+    const dot = event.target.closest('.lightbox-dot');
+    if (!dot) return;
+    activePhoto = [...lightboxDots.querySelectorAll('.lightbox-dot')].indexOf(
+      dot
+    );
+    showPhoto();
     resetLightboxScroll();
   });
-document
-  .querySelector('[data-lightbox-next]')
-  .addEventListener('click', (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    movePhoto(1);
-    resetLightboxScroll();
+  lightbox.addEventListener('click', (event) => {
+    if (event.target === lightbox) lightbox.close();
   });
-lightboxDots.addEventListener('click', (event) => {
-  const dot = event.target.closest('.lightbox-dot');
-  if (!dot) return;
-  activePhoto = [...lightboxDots.querySelectorAll('.lightbox-dot')].indexOf(dot);
-  showPhoto();
-  resetLightboxScroll();
-});
-lightbox.addEventListener('click', (event) => {
-  if (event.target === lightbox) lightbox.close();
-});
-document.addEventListener('keydown', (event) => {
-  if (!lightbox.open) return;
-  if (event.key === 'ArrowLeft') {
-    movePhoto(-1);
-  }
-  if (event.key === 'ArrowRight') {
-    movePhoto(1);
-  }
-});
+  document.addEventListener('keydown', (event) => {
+    if (!lightbox.open) return;
+    if (event.key === 'ArrowLeft') {
+      movePhoto(-1);
+    }
+    if (event.key === 'ArrowRight') {
+      movePhoto(1);
+    }
+  });
 }
 
 const root = document.documentElement;
@@ -392,21 +437,40 @@ if (embedded) {
   document.querySelectorAll('a[href$=".html"]').forEach((link) => {
     link.search = '?embed=1';
   });
-  const sendEmbedHeight = () => {
+  // Measure the content, never scrollHeight: the parent sizes this iframe from
+  // whatever we report, and scrollHeight can never fall below the iframe's own
+  // height, so reporting it feeds the height straight back and grows forever.
+  const measureEmbedHeight = () => {
+    let bottom = 0;
+    for (const node of document.body.children) {
+      const style = getComputedStyle(node);
+      if (
+        style.display === 'none' ||
+        style.position === 'fixed' ||
+        style.position === 'absolute'
+      ) {
+        continue;
+      }
+      bottom = Math.max(bottom, node.getBoundingClientRect().bottom);
+    }
+    return Math.ceil(bottom + window.scrollY);
+  };
+  let lastEmbedHeight = 0;
+  // `force` answers an explicit parent request, which must reply even when the
+  // height has not changed since the last (possibly unheard) message.
+  const sendEmbedHeight = (force = false) => {
+    const height = measureEmbedHeight();
+    if (!height || (!force && height === lastEmbedHeight)) return;
+    lastEmbedHeight = height;
     window.parent.postMessage(
-      {
-        source: 'droidtribe-static',
-        type: 'height',
-        height: Math.max(
-          document.documentElement.scrollHeight,
-          document.body.scrollHeight
-        )
-      },
+      { source: 'droidtribe-static', type: 'height', height },
       '*'
     );
   };
   const allowedParentOrigins = new Set([
     'https://hadiyarajesh.com',
+    'https://www.hadiyarajesh.com',
+    'http://localhost:3000',
     'http://localhost:3001'
   ]);
   window.addEventListener('message', (event) => {
@@ -417,14 +481,18 @@ if (embedded) {
       return;
     }
     if (event.data.type === 'request-height') {
-      sendEmbedHeight();
+      sendEmbedHeight(true);
       return;
     }
-    if (
-      event.data.type === 'viewport' &&
-      typeof event.data.top === 'number'
-    ) {
+    if (event.data.type === 'viewport' && typeof event.data.top === 'number') {
       root.style.setProperty('--embed-modal-top', `${event.data.top}px`);
+      if (typeof event.data.height === 'number') {
+        root.style.setProperty(
+          '--embed-viewport-height',
+          `${event.data.height}px`
+        );
+        refitLightbox();
+      }
       return;
     }
     if (
@@ -434,8 +502,29 @@ if (embedded) {
       setTheme(event.data.theme, false);
     }
   });
-  new ResizeObserver(sendEmbedHeight).observe(document.body);
-  new ResizeObserver(sendEmbedHeight).observe(document.documentElement);
-  window.addEventListener('load', sendEmbedHeight);
-  sendEmbedHeight();
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('a[href^="#"]');
+    if (!link) return;
+    const id = link.getAttribute('href').slice(1);
+    const target = id ? document.getElementById(id) : document.body;
+    if (!target) return;
+    event.preventDefault();
+    window.parent.postMessage(
+      {
+        source: 'droidtribe-static',
+        type: 'scroll-to',
+        top: Math.max(0, Math.round(target.getBoundingClientRect().top))
+      },
+      '*'
+    );
+  });
+  window.parent.postMessage(
+    { source: 'droidtribe-static', type: 'ready' },
+    '*'
+  );
+  const observeHeight = () => sendEmbedHeight();
+  new ResizeObserver(observeHeight).observe(document.body);
+  new ResizeObserver(observeHeight).observe(document.querySelector('#main'));
+  window.addEventListener('load', () => sendEmbedHeight(true));
+  sendEmbedHeight(true);
 }

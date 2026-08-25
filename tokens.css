@@ -11,6 +11,7 @@
   --color-border: oklch(92% 0.012 255);
   --color-divider: oklch(95% 0.008 255);
   --color-chip: oklch(97% 0.025 258);
+  --color-highlight: rgba(42, 111, 228, 0.16);
   --color-chip-border: oklch(91% 0.035 258);
   --color-footer: oklch(17% 0.03 255);
   --color-success: oklch(60% 0.16 145);

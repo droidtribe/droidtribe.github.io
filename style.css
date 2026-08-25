@@ -32,6 +32,11 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 5.5rem;
 }
+@media (max-width: 34rem) {
+  html {
+    scroll-padding-top: 4.5rem;
+  }
+}
 body {
   margin: 0;
   color: var(--color-text);
@@ -182,20 +187,25 @@ h3 {
   min-width: 0;
 }
 h1 {
-  max-width: 8.7ch;
-  margin-top: var(--space-4);
-  font-size: clamp(3.2rem, 7.2vw, 5.7rem);
+  margin-top: 0.4em;
+  font-size: clamp(2.5rem, 6.5vw, 4.625rem);
   font-weight: 600;
+  /* Roomy enough that the highlight background never touches the line above */
+  line-height: 1.14;
+  letter-spacing: -0.035em;
 }
 h1 em {
+  display: inline;
   font-family: var(--font-display);
   font-style: italic;
-  font-weight: 600;
-  letter-spacing: -0.05em;
-  white-space: nowrap;
-  background: color-mix(in oklch, var(--color-accent) 23%, transparent);
-  border-radius: 0.5rem;
-  padding-inline: 0.16em;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  white-space: normal;
+  background: var(--color-highlight);
+  border-radius: 8px;
+  padding: 0.05em 0.34em 0.05em 0.26em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 .lede {
   max-width: 34rem;
@@ -205,12 +215,13 @@ h1 em {
 }
 .stats {
   display: flex;
-  margin-top: var(--space-8);
+  flex-wrap: wrap;
+  row-gap: var(--space-4);
+  margin-top: 1.875rem;
 }
 .stats div {
-  min-width: 5.25rem;
-  padding-right: var(--space-5);
-  margin-right: var(--space-5);
+  padding-right: 1.625rem;
+  margin-right: 1.625rem;
   border-right: 1px solid var(--color-border);
 }
 .stats div:last-child {
@@ -224,13 +235,13 @@ h1 em {
 }
 .stats strong {
   color: var(--color-ink);
-  font: 600 1.55rem/1 var(--font-display);
+  font: 600 1.625rem/1 var(--font-display);
 }
 .stats span {
-  margin-top: 0.35rem;
-  color: var(--color-faint);
-  font: 500 0.55rem/1 var(--font-mono);
-  letter-spacing: 0.1em;
+  margin-top: 0.3125rem;
+  color: var(--color-muted);
+  font: 500 0.625rem/1 var(--font-mono);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 .button-primary {
@@ -431,9 +442,16 @@ h1 em {
   text-transform: uppercase;
 }
 .meetup-date {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.4rem;
   color: var(--color-muted);
   font: 500 0.75rem/1.3 var(--font-mono);
   letter-spacing: 0.03em;
+}
+.meetup-date-part {
+  white-space: nowrap;
 }
 .chevron {
   color: var(--color-faint);
@@ -699,6 +717,9 @@ a.speaker:hover {
   color: inherit;
   text-decoration: none;
 }
+:root {
+  --lightbox-max-h: min(70vh, 40rem);
+}
 .lightbox {
   width: min(94vw, 60rem);
   padding: 0;
@@ -739,19 +760,28 @@ a.speaker:hover {
   line-height: 1;
   cursor: pointer;
 }
+/* The frame holds the nav buttons at a fixed width; the stage inside it is
+   sized to the photo by app.js, so the buttons never move as photos change. */
+.lightbox-frame {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  margin: 0 var(--space-5);
+}
 .lightbox-stage {
   position: relative;
-  margin: 0 var(--space-5);
   overflow: hidden;
-  height: min(62vh, 38rem);
-  aspect-ratio: auto;
+  width: var(--lightbox-stage-width, 100%);
+  max-width: 100%;
+  height: var(--lightbox-stage-height, var(--lightbox-max-h));
+  max-height: var(--lightbox-max-h);
   border-radius: var(--radius-sm);
   background: var(--color-surface-alt);
 }
 .lightbox-stage img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 .lightbox-nav {
   position: absolute;
@@ -800,7 +830,9 @@ a.speaker:hover {
   border-radius: var(--radius-pill);
   background: var(--color-border);
   cursor: pointer;
-  transition: width var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+  transition:
+    width var(--dur-fast) var(--ease-out),
+    background var(--dur-fast) var(--ease-out);
 }
 .lightbox-dot.is-active {
   width: 1.6rem;
@@ -851,17 +883,21 @@ a.speaker:hover {
 .is-embedded .hero-grid {
   padding-top: var(--space-8);
 }
+.is-embedded {
+  --lightbox-max-h: min(calc(var(--embed-viewport-height, 100vh) * 0.7), 40rem);
+}
+/* `vh` inside the iframe is the whole page, so viewport-tall floors would keep
+   inflating the height we report to the parent. */
+.is-embedded .legal-page {
+  min-height: 0;
+}
 .is-embedded .lightbox {
   position: absolute;
   inset: auto auto auto 50%;
   top: var(--embed-modal-top, 50vh);
   margin: 0;
-  max-height: calc(100vh - 2rem);
+  max-height: calc(var(--embed-viewport-height, 100vh) - 2rem);
   transform: translate(-50%, -50%);
-}
-.is-embedded .lightbox-stage {
-  height: min(62vh, 38rem);
-  aspect-ratio: auto;
 }
 .legal-page {
   min-height: calc(100vh - 5.5rem);
@@ -955,10 +991,10 @@ a.speaker:hover {
     gap: var(--space-3);
   }
   .site-header nav {
-    gap: 0.75rem;
+    gap: 0.9rem;
   }
   .site-header nav a {
-    font-size: 0.58rem;
+    font-size: 0.68rem;
   }
   .hero-grid,
   .about-intro,
@@ -966,7 +1002,6 @@ a.speaker:hover {
     grid-template-columns: minmax(0, 1fr);
   }
   .hero-image {
-    order: -1;
     max-width: 33rem;
   }
   .founder-reverse figure {
@@ -992,11 +1027,12 @@ a.speaker:hover {
   .site-header {
     min-height: 4rem;
   }
-  .site-header nav a:last-child {
-    display: none;
-  }
   .wordmark span {
-    font-size: 0.75rem;
+    font-size: 0.9rem;
+  }
+  .wordmark img {
+    width: 1.85rem;
+    height: 1.85rem;
   }
   .timeline {
     padding-left: 3.15rem;
@@ -1010,34 +1046,66 @@ a.speaker:hover {
     height: 2.2rem;
     border-radius: 0.6rem;
   }
+  /* Stack title above date so the date never squeezes into a 12ch column,
+     and pin the chevron to the title line instead of the date line. */
   .meetup-trigger {
-    align-items: flex-start;
+    position: relative;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .meetup-title-row {
+    gap: 0.55rem;
+    padding-right: 2rem;
   }
   .meetup-meta {
-    justify-content: flex-end;
+    width: 100%;
   }
   .meetup-date {
-    max-width: 12ch;
-    text-align: right;
+    text-align: left;
+    font-size: 0.7rem;
+  }
+  .chevron {
+    position: absolute;
+    top: 1.45rem;
+    right: clamp(1.15rem, 3vw, 1.75rem);
+  }
+  .speaker-topic {
+    font-size: 0.875rem;
+  }
+  .photo-button {
+    flex-basis: min(84%, 18.75rem);
   }
   .footer-grid {
     grid-template-columns: minmax(0, 1fr);
   }
   .footer-bottom {
     flex-direction: column;
+    align-items: flex-start;
+    font-size: 0.68rem;
   }
   .footer-theme-switcher {
-    justify-self: start;
+    align-self: flex-start;
   }
-  .stats div {
-    min-width: 4.45rem;
+  .lightbox {
+    width: min(96vw, 60rem);
   }
-  .lightbox-stage {
+  .lightbox-head {
+    padding: var(--space-3) var(--space-4);
+  }
+  :root {
+    --lightbox-max-h: min(58vh, 26rem);
+  }
+  .lightbox-frame {
     margin: 0 var(--space-3);
   }
   .lightbox-nav {
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+  .icon-button {
+    width: 2.5rem;
+    height: 2.5rem;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1060,8 +1128,7 @@ a[aria-disabled='true'] {
 .button-primary:active,
 .meetup-trigger:active,
 .photo-button:active,
-.icon-button:active,
-.lightbox-nav:active {
+.icon-button:active {
   transform: translateY(1px);
 }
 
