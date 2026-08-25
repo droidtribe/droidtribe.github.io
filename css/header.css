@@ -25,9 +25,12 @@
 .wordmark img {
   width: 2.15rem;
   height: 2.15rem;
-  /* A squircle, not a circle: the logo's outer icons touch its edges. */
-  border-radius: 26%;
+  /* The mark sits on a white tile with its padding baked into the file, so the
+     icons around its edge never touch the rounded corners. The ring gives the
+     tile an edge on the light theme, where the header is white too. */
+  border-radius: 28%;
   background: #fff;
+  box-shadow: 0 0 0 1px var(--color-border);
 }
 .site-header nav {
   display: flex;

@@ -55,11 +55,25 @@ photo sits on automatically, so order is the only thing to think about.
 
 ## Changing the contact address or social links
 
-Edit `data/site.js`. `js/site.js` applies it to every page.
+Edit `data/site.js` — that is the only place any of it is written down.
+`js/site.js` applies it to every page through `data-site-*` hooks:
 
-The supporting pages also carry the address as literal text so they still read
-correctly with JavaScript disabled. If you change the address, update those
-literals too — search for the old one across `*.html`.
+| Hook                  | Filled with                                           |
+| --------------------- | ----------------------------------------------------- |
+| `data-site-name`      | `site.name`                                           |
+| `data-site-email`     | `site.email`, as both the link text and the `mailto:` |
+| `data-site-youtube`   | `site.youtube`                                        |
+| `data-site-community` | `site.parentCommunityUrl`                             |
+| `data-site-socials`   | the whole social row, rendered from `site.social`     |
+| `data-site-year`      | the current year                                      |
+
+Adding a social link means an entry in `site.social` plus, if it is a network
+that is not there yet, an SVG path in the `socialIcons` map at the top of
+`js/site.js`.
+
+The pages carry no literal addresses or URLs, so there is nothing to keep in
+step. The trade is that these values need JavaScript to appear — same as the
+meetup archive and the organiser profiles.
 
 ## Where the styles live
 

@@ -12,6 +12,17 @@ const setTheme = (choice, announce = true) => {
       : choice;
   document.documentElement.dataset.theme = actual;
   localStorage.setItem('droidtribe-theme', choice);
+  // Keep the browser chrome on mobile in step with the page ground, read from
+  // the token rather than repeated as a literal in every page's <head>.
+  const themeColor = document.querySelector('meta[name="theme-color"]');
+  if (themeColor) {
+    themeColor.setAttribute(
+      'content',
+      getComputedStyle(document.documentElement)
+        .getPropertyValue('--color-surface')
+        .trim()
+    );
+  }
   themeChoices.forEach((button) => {
     const selected = String(button.dataset.themeChoice === choice);
     button.setAttribute('aria-pressed', selected);
