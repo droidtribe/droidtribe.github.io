@@ -1,55 +1,102 @@
-const A = 'assets/';
+const ASSETS = 'assets/';
+const HOST = 'Rajesh Hadiya';
+
+// Each speaker is [name, talk, profile URL (optional), file in assets/speakers/].
 const meetups = [
+  {
+    number: 6,
+    city: 'Pune',
+    venue: 'Technogise',
+    date: '22 February, 2026 · 11 AM - 5 PM',
+    map: 'https://maps.app.goo.gl/HVFnEuwW4NTJWAXt8',
+    recording:
+      'https://youtube.com/playlist?list=PLqIWi4seAoxJ-MHJZiGyWxb7CiPpriHn9',
+    speakers: [
+      [
+        'Belal Khan',
+        'From Hugging Face to APK: Pipeline for Local Android AI',
+        'https://www.linkedin.com/in/probelalkhan/',
+        'belal-khan.jpg'
+      ],
+      [
+        'Prakhar Gandhi',
+        'NFC Integration with Jetpack Compose and KMP',
+        'https://www.linkedin.com/in/prakhargandhi14/',
+        'prakhar-gandhi.jpg'
+      ],
+      [
+        'Rajesh Hadiya',
+        'CI/CD for Android Developers',
+        'https://www.linkedin.com/in/hadiyarajesh/',
+        'rajesh-hadiya.jpg'
+      ],
+      [
+        'Gaurav Thakkar',
+        'Blazing Fast Gradle Builds for Android',
+        'https://www.linkedin.com/in/gaurav-thakkar/',
+        'gaurav-thakkar.jpg'
+      ]
+    ],
+    photos: [
+      'photo-01.jpg',
+      'photo-02.jpg',
+      'photo-03.jpg',
+      'photo-04.jpg',
+      'photo-05.jpg'
+    ]
+  },
   {
     number: 5,
     city: 'Mumbai',
+    venue: 'CleverTap',
     date: '29 November, 2025 · 11 AM - 5 PM',
-    venue: 'https://maps.app.goo.gl/75568rBuHnHNr2GT9',
+    map: 'https://maps.app.goo.gl/75568rBuHnHNr2GT9',
     recording:
-      'https://youtube.com/playlist?list=PLqIWi4seAoxLoEl9_CtCNaJEijxAOI8Ri&si=vosYrDtwqqIk3Stm',
+      'https://youtube.com/playlist?list=PLqIWi4seAoxLoEl9_CtCNaJEijxAOI8Ri',
     speakers: [
       [
         'Avik Mukherjee',
         'Owning a Legacy Android Codebase in 2025',
         'https://www.linkedin.com/in/avikmukherjee-android-dev/',
-        'd66638954382ff47.jpg'
+        'avik-mukherjee.jpg'
       ],
       [
         'Belal Khan',
         'Gemini Nano-On Device AI for Next Generation Apps',
         'https://www.linkedin.com/in/probelalkhan/',
-        '969b9d619ceb2a6b.jpg'
+        'belal-khan.jpg'
       ],
       [
         'Santosh Gaikar',
         'Scaling App from Zero to Millions',
         'https://www.linkedin.com/in/sgaikar1/',
-        '9c4cea2b611a25bc.jpeg'
+        'santosh-gaikar.jpg'
       ],
       [
         'Saqeeb Mohammad',
         'White-Labeling Android Apps at Scale Using Jenkins CI/CD',
         'https://www.linkedin.com/in/msaqeeb72/',
-        'faee4c0cc6a7c42a.jpeg'
+        'saqeeb-mohammad.jpg'
       ]
     ],
     photos: [
-      '3e6d746dc4d09998',
-      '0c4daca97bbc6913',
-      '3a8df035759df2e7',
-      'b1bd41701fcde48a',
-      '36680a961c4825a8',
-      '9103bf1cc7e94d14',
-      'meetup-5-7.jpeg',
-      'meetup-5-8.jpeg',
-      'meetup-5-9.jpeg'
+      'photo-01.jpg',
+      'photo-02.jpg',
+      'photo-03.jpg',
+      'photo-04.jpg',
+      'photo-05.jpg',
+      'photo-06.jpg',
+      'photo-07.jpg',
+      'photo-08.jpg',
+      'photo-09.jpg'
     ]
   },
   {
     number: 4,
     city: 'Bengaluru',
+    venue: 'InMobi',
     date: '10 October, 2025 · 11 AM - 5 PM',
-    venue: 'https://maps.app.goo.gl/89Q7UVDMuK3XvA4b6',
+    map: 'https://maps.app.goo.gl/89Q7UVDMuK3XvA4b6',
     recording:
       'https://www.youtube.com/playlist?list=PLqIWi4seAoxJVrNLBRYg9PNnorzlxzj4Q',
     speakers: [
@@ -57,47 +104,48 @@ const meetups = [
         'Jai Goyal',
         'What is AOSP and How to Contribute to AOSP',
         'https://www.linkedin.com/in/goyaljai/',
-        '0b0d3da36a26cd15.jpg'
+        'jai-goyal.jpg'
       ],
       [
         'Belal Khan',
         'A Hands-on Guide to KMP and Jetpack Compose',
         'https://www.linkedin.com/in/probelalkhan/',
-        '969b9d619ceb2a6b.jpg'
+        'belal-khan.jpg'
       ],
       [
         'Ankur Mudgal',
         'Unpacking Video Streaming with Exoplayer',
         'https://www.linkedin.com/in/ankurmudgal/',
-        '41ed3bacd642a3ef.jpg'
+        'ankur-mudgal.jpg'
       ],
       [
         'Ankit Kumar',
         'Why Every App Needs a Design System',
         'https://www.linkedin.com/in/ankitk22/',
-        '0e723da280cca855.jpg'
+        'ankit-kumar.jpg'
       ]
     ],
     photos: [
-      'b9f8c169230ea093',
-      '386fa22c139f187f',
-      '9cb62a98787b700f',
-      '94189b153aa71491',
-      'e812c601b655d56d',
-      '035537c607d5a22c',
-      'meetup-4-7.jpeg',
-      'meetup-4-8.jpeg',
-      'meetup-4-9.jpeg',
-      'meetup-4-10.jpeg',
-      'meetup-4-11.jpeg',
-      'meetup-4-12.jpeg'
+      'photo-01.jpg',
+      'photo-02.jpg',
+      'photo-03.jpg',
+      'photo-04.jpg',
+      'photo-05.jpg',
+      'photo-06.jpg',
+      'photo-07.jpg',
+      'photo-08.jpg',
+      'photo-09.jpg',
+      'photo-10.jpg',
+      'photo-11.jpg',
+      'photo-12.jpg'
     ]
   },
   {
     number: 3,
     city: 'Pune',
+    venue: 'Technogise',
     date: '2 August, 2025 · 11 AM - 5 PM',
-    venue: 'https://maps.app.goo.gl/R5w1U4ZjErgXbs637',
+    map: 'https://maps.app.goo.gl/R5w1U4ZjErgXbs637',
     recording:
       'https://youtube.com/playlist?list=PLqIWi4seAoxKoc1siRkJuCTJumuvMLqg8',
     speakers: [
@@ -105,40 +153,41 @@ const meetups = [
         'Shreyas Patil',
         'Debugging App Performance At Scale',
         'https://www.linkedin.com/in/patil-shreyas/',
-        'f4393591d0d6204d.jpeg'
+        'shreyas-patil.jpg'
       ],
       [
         'Rajesh Hadiya',
         'Annotation Processor In Action',
         'https://www.linkedin.com/in/hadiyarajesh/',
-        '2502f2262c2aae28.jpeg'
+        'rajesh-hadiya.jpg'
       ],
       [
         'Suraj Bichkunde',
         "Mobile At Scale: What They Don't Teach You",
         'https://www.linkedin.com/in/suraj-bichkunde-786729178/',
-        '29523b43a956719f.jpeg'
+        'suraj-bichkunde.jpg'
       ],
       [
         'Gaurav Thakkar',
         'The Anatomy of a Hack in Android',
         'https://www.linkedin.com/in/gaurav-thakkar/',
-        '6ffc3c8c230196b9.jpeg'
+        'gaurav-thakkar.jpg'
       ]
     ],
     photos: [
-      '328539e2ed948c3d',
-      'd2d110dde1757d28',
-      'e7052bd3a5c9d2db',
-      'd0d84f189c93eee3',
-      '8e1bb01f7619a59f'
+      'photo-01.jpg',
+      'photo-02.jpg',
+      'photo-03.jpg',
+      'photo-04.jpg',
+      'photo-05.jpg'
     ]
   },
   {
     number: 2,
     city: 'Pune',
+    venue: 'Technogise',
     date: '9 March, 2025 · 11 AM - 5 PM',
-    venue: 'https://maps.app.goo.gl/R5w1U4ZjErgXbs637',
+    map: 'https://maps.app.goo.gl/R5w1U4ZjErgXbs637',
     recording:
       'https://www.youtube.com/playlist?list=PLqIWi4seAoxKIN3tdbk6Dwoyo1xdRH08v',
     speakers: [
@@ -146,83 +195,81 @@ const meetups = [
         'Suraj Kulkarni',
         'On-device LLMs on Android',
         'https://www.linkedin.com/in/thekoolsk/',
-        'd1fc7d40fae18674.jpeg'
+        'suraj-kulkarni.jpg'
       ],
       [
         'Rajesh Hadiya',
         'Compose, In the ViewModel',
         'https://www.linkedin.com/in/hadiyarajesh/',
-        '2502f2262c2aae28.jpeg'
+        'rajesh-hadiya.jpg'
       ],
       [
         'Gandharva Kumar',
         'Measuring App Reliability',
         '',
-        '06996b3f2442d416.jpeg'
+        'gandharva-kumar.jpg'
       ],
       [
         'Gaurav Thakkar',
         'Kotlin Multiplatform Illusion',
         'https://www.linkedin.com/in/gaurav-thakkar/',
-        '6ffc3c8c230196b9.jpeg'
+        'gaurav-thakkar.jpg'
       ]
     ],
-    photos: [
-      'df0e4fbb35907542',
-      '61d77012eaded31e',
-      'f6dbeca39d51465b',
-      '1b62a40657095c0d'
-    ]
+    photos: ['photo-01.jpg', 'photo-02.jpg', 'photo-03.jpg', 'photo-04.jpg']
   },
   {
     number: 1,
     city: 'Pune',
+    venue: 'Balaji Business Centre',
     date: '24 November, 2024 · 11 AM - 5 PM',
-    venue: 'https://maps.app.goo.gl/vauRW6ypNjFAc6xz6',
+    map: 'https://maps.app.goo.gl/vauRW6ypNjFAc6xz6',
     speakers: [
       [
         'Kailash Sharma',
         'Server-side development with Ktor',
         'https://www.linkedin.com/in/thekaailashsharma/',
-        '25cbd44de7c2d0b3.jpeg'
+        'kailash-sharma.jpg'
       ],
       [
         'Rajesh Hadiya',
         'Build your first Kotlin compiler plugin',
         'https://www.linkedin.com/in/hadiyarajesh/',
-        '2502f2262c2aae28.jpeg'
+        'rajesh-hadiya.jpg'
       ],
       [
         'Gaurav Thakkar',
         'Dependency management in multi-module project',
         'https://www.linkedin.com/in/gaurav-thakkar/',
-        '6ffc3c8c230196b9.jpeg'
+        'gaurav-thakkar.jpg'
       ],
       [
         'Tarun Mehta',
         'Mobile system design',
         'https://www.linkedin.com/in/tarun-mehta-8541016b/',
-        'f40487c11e035a31.jpeg'
+        'tarun-mehta.jpg'
       ]
     ],
     photos: [
-      '010fcf3b9dd04a97',
-      '9ea32fe6c4e1f12f',
-      '7ff7c9712866d56b',
-      '8c577e3f055b2cc2',
-      '85f25e9a67ec2fe3',
-      'd4537da27d7b147d'
+      'photo-01.webp',
+      'photo-02.webp',
+      'photo-03.webp',
+      'photo-04.webp',
+      'photo-05.webp',
+      'photo-06.webp'
     ]
   }
 ];
 
-const photoFile = (id) => (id.includes('.') ? id : id);
-const img = (id) => `${A}${photoFile(id)}`;
+const speakerPhoto = (file) => `${ASSETS}speakers/${file}`;
+const meetupPhoto = (number, file) => `${ASSETS}meetup-${number}/${file}`;
+
 const list = document.querySelector('#meetup-list');
 const mapPin = `<svg class="map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>`;
 const recordingIcon = `<svg class="recording-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg>`;
 const speakerMarkup = ([name, topic, href, photo]) => {
-  const content = `<img src="${img(photo)}" alt="${name}" /><span><span class="speaker-name">${name}${name === 'Rajesh Hadiya' ? '<span class="host-chip">Host</span>' : ''}</span><span class="speaker-topic">${topic}</span></span>`;
+  const hostChip = name === HOST ? '<span class="host-chip">Host</span>' : '';
+  const content = `<img src="${speakerPhoto(photo)}" alt="${name}" loading="lazy" /><span><span class="speaker-name">${name}${hostChip}</span><span class="speaker-topic">${topic}</span></span>`;
   return href
     ? `<a class="speaker" href="${href}" target="_blank" rel="noreferrer">${content}</a>`
     : `<div class="speaker">${content}</div>`;
@@ -234,14 +281,17 @@ const dateMarkup = (value) =>
     .split(' · ')
     .map((part) => `<span class="meetup-date-part">${part}</span>`)
     .join('<span class="meetup-date-sep" aria-hidden="true">·</span>');
-const photoMarkup = (photo, meetup) =>
-  `<button class="photo-button" type="button" data-photo="${img(photo)}" data-alt="Meetup #${meetup.number} photo" aria-label="Open Meetup #${meetup.number} photo"><img src="${img(photo)}" alt="Meetup #${meetup.number} photo" loading="lazy" /></button>`;
-let refitLightbox = () => {};
+const photoMarkup = (photo, meetup, index) => {
+  const src = meetupPhoto(meetup.number, photo);
+  const alt = `Meetup #${meetup.number} photo ${index + 1}`;
+  return `<button class="photo-button" type="button" data-photo="${src}" data-alt="${alt}" aria-label="Open ${alt}"><img src="${src}" alt="${alt}" loading="lazy" /></button>`;
+};
+
 if (list) {
   list.innerHTML = meetups
     .map(
       (meetup, index) =>
-        `<article class="meetup ${index === 0 ? 'is-open' : ''}"><span class="meetup-mark" aria-hidden="true">${meetup.number}</span><div class="meetup-card"><button class="meetup-trigger" type="button" aria-expanded="${index === 0}" aria-controls="meetup-${meetup.number}"><span class="meetup-title-row"><span class="meetup-title">Meetup #${meetup.number}</span><span class="city-chip">${mapPin} ${meetup.city}</span></span><span class="meetup-meta"><span class="meetup-date">${dateMarkup(meetup.date)}</span><span class="chevron" aria-hidden="true">⌄</span></span></button><div class="venue">${mapPin}<span class="venue-label">Venue</span><a href="${meetup.venue}" target="_blank" rel="noreferrer">${meetup.city}</a></div><div class="meetup-panel" id="meetup-${meetup.number}" ${index === 0 ? '' : 'hidden'}><div><p class="panel-label">Speakers</p><div class="speaker-grid">${meetup.speakers.map(speakerMarkup).join('')}</div></div><div><p class="panel-label">Photos</p><div class="photo-strip">${meetup.photos.map((photo) => photoMarkup(photo, meetup)).join('')}</div></div>${meetup.recording ? `<a class="recording-link" href="${meetup.recording}" target="_blank" rel="noreferrer">${recordingIcon}<span>Watch recordings</span></a>` : ''}</div></div></article>`
+        `<article class="meetup ${index === 0 ? 'is-open' : ''}"><span class="meetup-mark" aria-hidden="true">${meetup.number}</span><div class="meetup-card"><button class="meetup-trigger" type="button" aria-expanded="${index === 0}" aria-controls="meetup-${meetup.number}"><span class="meetup-title-row"><span class="meetup-title">Meetup #${meetup.number}</span><span class="city-chip">${mapPin} ${meetup.city}</span></span><span class="meetup-meta"><span class="meetup-date">${dateMarkup(meetup.date)}</span><span class="chevron" aria-hidden="true">⌄</span></span></button><div class="venue">${mapPin}<span class="venue-label">Venue</span><a href="${meetup.map}" target="_blank" rel="noreferrer">${meetup.venue}</a></div><div class="meetup-panel" id="meetup-${meetup.number}" ${index === 0 ? '' : 'hidden'}><div><p class="panel-label">Speakers</p><div class="speaker-grid">${meetup.speakers.map(speakerMarkup).join('')}</div></div><div><p class="panel-label">Photos</p><div class="photo-strip">${meetup.photos.map((photo, photoIndex) => photoMarkup(photo, meetup, photoIndex)).join('')}</div></div>${meetup.recording ? `<a class="recording-link" href="${meetup.recording}" target="_blank" rel="noreferrer">${recordingIcon}<span>Watch recordings</span></a>` : ''}</div></div></article>`
     )
     .join('');
 
@@ -275,44 +325,14 @@ if (list) {
 
   const lightbox = document.querySelector('#lightbox');
   const lightboxImage = document.querySelector('#lightbox-image');
-  const lightboxStage = document.querySelector('.lightbox-stage');
-  const lightboxFrame = document.querySelector('.lightbox-frame');
   const lightboxCount = document.querySelector('#lightbox-count');
   const lightboxDots = document.querySelector('#lightbox-dots');
   let gallery = [];
   let activePhoto = 0;
-  // Shrink the stage to the photo's own shape (never past the CSS cap) so wide
-  // photos sit flush instead of floating in letterbox bars. The height only ever
-  // grows while one gallery is open, so paging never makes the dialog jump around.
-  let stageHeight = 0;
-  const fitStage = () => {
-    if (!lightboxStage || !lightboxFrame) return;
-    const { naturalWidth, naturalHeight } = lightboxImage;
-    const cap = parseFloat(getComputedStyle(lightboxStage).maxHeight);
-    const available = lightboxFrame.clientWidth;
-    if (!naturalWidth || !naturalHeight || !cap || !available) return;
-    const ratio = naturalWidth / naturalHeight;
-    stageHeight = Math.min(cap, Math.max(stageHeight, available / ratio));
-    lightboxStage.style.setProperty(
-      '--lightbox-stage-height',
-      `${Math.round(stageHeight)}px`
-    );
-    lightboxStage.style.setProperty(
-      '--lightbox-stage-width',
-      `${Math.round(Math.min(available, stageHeight * ratio))}px`
-    );
-  };
-  lightboxImage.addEventListener('load', fitStage);
-  window.addEventListener('resize', () => {
-    stageHeight = 0;
-    fitStage();
-  });
-  refitLightbox = fitStage;
   const showPhoto = () => {
     const item = gallery[activePhoto];
     lightboxImage.src = item.src;
     lightboxImage.alt = item.alt;
-    if (lightboxImage.complete) fitStage();
     lightboxCount.textContent = `${activePhoto + 1} / ${gallery.length}`;
     lightboxDots.innerHTML = gallery
       .map(
@@ -330,12 +350,6 @@ if (list) {
     activePhoto = (activePhoto + direction + gallery.length) % gallery.length;
     showPhoto();
   };
-  const resetLightboxScroll = () => {
-    lightbox.scrollTop = 0;
-    requestAnimationFrame(() => {
-      lightbox.scrollTop = 0;
-    });
-  };
   list.addEventListener('click', (event) => {
     const button = event.target.closest('.photo-button');
     if (!button) return;
@@ -345,7 +359,6 @@ if (list) {
     activePhoto = [
       ...button.parentElement.querySelectorAll('.photo-button')
     ].indexOf(button);
-    stageHeight = 0;
     showPhoto();
     lightbox.showModal();
     if (embedded) {
@@ -364,7 +377,6 @@ if (list) {
       event.preventDefault();
       event.stopPropagation();
       movePhoto(-1);
-      resetLightboxScroll();
     });
   document
     .querySelector('[data-lightbox-next]')
@@ -372,7 +384,6 @@ if (list) {
       event.preventDefault();
       event.stopPropagation();
       movePhoto(1);
-      resetLightboxScroll();
     });
   lightboxDots.addEventListener('click', (event) => {
     const dot = event.target.closest('.lightbox-dot');
@@ -381,23 +392,41 @@ if (list) {
       dot
     );
     showPhoto();
-    resetLightboxScroll();
   });
   lightbox.addEventListener('click', (event) => {
     if (event.target === lightbox) lightbox.close();
   });
   document.addEventListener('keydown', (event) => {
     if (!lightbox.open) return;
-    if (event.key === 'ArrowLeft') {
-      movePhoto(-1);
-    }
-    if (event.key === 'ArrowRight') {
-      movePhoto(1);
-    }
+    if (event.key === 'ArrowLeft') movePhoto(-1);
+    if (event.key === 'ArrowRight') movePhoto(1);
   });
 }
 
 const root = document.documentElement;
+
+const navToggle = document.querySelector('[data-nav-toggle]');
+const siteNav = document.querySelector('#site-nav');
+if (navToggle && siteNav) {
+  const setNavOpen = (open) => {
+    document.body.classList.toggle('nav-is-open', open);
+    navToggle.setAttribute('aria-expanded', String(open));
+    navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+  navToggle.addEventListener('click', () =>
+    setNavOpen(navToggle.getAttribute('aria-expanded') !== 'true')
+  );
+  siteNav.addEventListener('click', (event) => {
+    if (event.target.closest('a')) setNavOpen(false);
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setNavOpen(false);
+  });
+  document.addEventListener('click', (event) => {
+    if (!event.target.closest('.site-header')) setNavOpen(false);
+  });
+}
+
 const choices = document.querySelectorAll('[data-theme-choice]');
 const storedTheme = localStorage.getItem('droidtribe-theme') || 'dark';
 const embedded = new URLSearchParams(location.search).get('embed') === '1';
@@ -491,7 +520,6 @@ if (embedded) {
           '--embed-viewport-height',
           `${event.data.height}px`
         );
-        refitLightbox();
       }
       return;
     }
@@ -502,6 +530,7 @@ if (embedded) {
       setTheme(event.data.theme, false);
     }
   });
+  // This document cannot scroll itself while embedded, so hand jumps to the parent.
   document.addEventListener('click', (event) => {
     const link = event.target.closest('a[href^="#"]');
     if (!link) return;

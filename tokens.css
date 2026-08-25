@@ -29,9 +29,9 @@
   --shadow-card: 0 0.9rem 2.1rem oklch(14% 0.03 255 / 0.1);
   --shadow-photo: 0 0.8rem 1.75rem oklch(14% 0.03 255 / 0.16);
   --shadow-lightbox: 0 2.5rem 6rem oklch(10% 0.02 255 / 0.48);
-  --font-display: 'Bricolage Static', Arial, sans-serif;
-  --font-body: 'Hanken Static', Arial, sans-serif;
-  --font-mono: 'JetBrains Static', monospace;
+  --font-display: 'Bricolage Grotesque', Arial, sans-serif;
+  --font-body: 'Hanken Grotesk', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;

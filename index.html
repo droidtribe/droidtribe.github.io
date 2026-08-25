@@ -9,24 +9,55 @@
     />
     <meta name="theme-color" content="#0e1522" />
     <title>DroidTribe — Android developer community</title>
-    <link rel="icon" href="assets/04bf30c17db2ac2f" />
-    <link rel="stylesheet" href="tokens.css?v=20260825-1200" />
-    <link rel="stylesheet" href="style.css?v=20260825-1200" />
+    <link rel="icon" href="assets/brand/logo.webp" />
+    <link rel="stylesheet" href="tokens.css?v=20260825-1630" />
+    <link rel="stylesheet" href="style.css?v=20260825-1630" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <a class="wordmark" href="#top" aria-label="DroidTribe home"
-        ><img src="assets/04bf30c17db2ac2f" alt="" /> <span>DroidTribe</span></a
+        ><img src="assets/brand/logo.webp" alt="" /><span>DroidTribe</span></a
       >
-      <nav aria-label="Primary">
-        <a href="#about">About</a><a href="#meetups">Meetups</a
+      <button
+        class="nav-toggle"
+        type="button"
+        data-nav-toggle
+        aria-expanded="false"
+        aria-controls="site-nav"
+        aria-label="Open menu"
+      >
+        <svg
+          class="nav-toggle-lines"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+        <svg
+          class="nav-toggle-cross"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <path d="M6 6l12 12M18 6 6 18" />
+        </svg>
+      </button>
+      <nav id="site-nav" aria-label="Primary">
+        <a href="#meetups">Meetups</a
         ><a
           href="https://youtube.com/@droidtribe"
           target="_blank"
           rel="noreferrer"
-          >Watch</a
-        >
+          >YouTube</a
+        ><a href="#about">About</a>
       </nav>
     </header>
 
@@ -61,9 +92,9 @@
               friendships through community-led meetups.
             </p>
             <div class="stats" aria-label="Community statistics">
-              <div><strong>5</strong><span>Meetups</span></div>
+              <div><strong>6</strong><span>Meetups</span></div>
               <div><strong>3</strong><span>Cities</span></div>
-              <div><strong>20</strong><span>Talks</span></div>
+              <div><strong>24</strong><span>Talks</span></div>
             </div>
             <a class="button-primary" href="#meetups"
               >Explore meetups <span aria-hidden="true">→</span></a
@@ -71,7 +102,7 @@
           </div>
           <figure class="hero-image">
             <img
-              src="assets/4bce2356d2a419c7"
+              src="assets/hero/community-illustration.webp"
               alt="Illustration of Android developers exchanging ideas"
             />
           </figure>
@@ -94,7 +125,7 @@
             <article class="founder">
               <figure>
                 <img
-                  src="assets/d02544d295a0072a.jpeg"
+                  src="assets/organizers/rajesh-hadiya.jpg"
                   alt="Rajesh Hadiya, DroidTribe organizer"
                 />
               </figure>
@@ -116,7 +147,7 @@
             <article class="founder founder-reverse">
               <figure>
                 <img
-                  src="assets/6ffc3c8c230196b9.jpeg"
+                  src="assets/organizers/gaurav-thakkar.jpg"
                   alt="Gaurav Thakkar, DroidTribe organizer"
                 />
               </figure>
@@ -141,7 +172,7 @@
           <div class="section-heading">
             <p class="eyebrow">Archive</p>
             <h2 id="meetups-title">Meetups, shared</h2>
-            <p>Five gatherings across Pune, Bengaluru, and Mumbai.</p>
+            <p>Six gatherings across Pune, Bengaluru, and Mumbai.</p>
           </div>
           <div class="timeline" id="meetup-list"></div>
         </div>
@@ -152,7 +183,7 @@
       <div class="shell footer-grid">
         <div class="footer-brand">
           <a class="wordmark" href="#top">
-            <img src="assets/04bf30c17db2ac2f" alt="" />
+            <img src="assets/brand/logo.webp" alt="" />
             <span>DroidTribe</span>
           </a>
         </div>
@@ -166,7 +197,7 @@
           <p class="footer-label">Connect</p>
           <div class="footer-socials" aria-label="DroidTribe social links">
             <a
-              href="https://github.com/hadiyarajesh"
+              href="https://github.com/droidtribe"
               target="_blank"
               rel="noreferrer"
               aria-label="GitHub"
@@ -186,7 +217,7 @@
                 /></svg
             ></a>
             <a
-              href="https://www.youtube.com/@hadiyarajesh"
+              href="https://youtube.com/@droidtribe"
               target="_blank"
               rel="noreferrer"
               aria-label="YouTube"
@@ -265,7 +296,7 @@
     </footer>
     <dialog class="lightbox" id="lightbox" aria-labelledby="lightbox-title">
       <div class="lightbox-head">
-        <p id="lightbox-title">Meetup photo</p>
+        <p id="lightbox-title">Meetup photos</p>
         <button
           type="button"
           class="icon-button"
@@ -275,7 +306,8 @@
           ×
         </button>
       </div>
-      <div class="lightbox-frame">
+      <div class="lightbox-stage">
+        <img id="lightbox-image" alt="" />
         <button
           type="button"
           class="lightbox-nav prev"
@@ -294,9 +326,6 @@
             <path d="m15 18-6-6 6-6" />
           </svg>
         </button>
-        <div class="lightbox-stage">
-          <img id="lightbox-image" alt="" />
-        </div>
         <button
           type="button"
           class="lightbox-nav next"
@@ -328,6 +357,6 @@
         aria-live="polite"
       ></p>
     </dialog>
-    <script src="app.js?v=20260825-1200"></script>
+    <script src="app.js?v=20260825-1630"></script>
   </body>
 </html>

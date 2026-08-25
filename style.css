@@ -2,20 +2,20 @@
  * source-faithful static build · nav: compact archive · footer: contextual index · contrast: pass (40–41)
  * pre-emit critique: P5 H4 E5 S5 R4 V4 */
 @font-face {
-  font-family: 'Bricolage Static';
-  src: url('assets/1637f34f503d08a7.woff2') format('woff2');
+  font-family: 'Bricolage Grotesque';
+  src: url('assets/fonts/bricolage-grotesque.woff2') format('woff2');
   font-weight: 200 800;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Hanken Static';
-  src: url('assets/5cbf1f691c175d00.woff2') format('woff2');
+  font-family: 'Hanken Grotesk';
+  src: url('assets/fonts/hanken-grotesk.woff2') format('woff2');
   font-weight: 400 700;
   font-display: swap;
 }
 @font-face {
-  font-family: 'JetBrains Static';
-  src: url('assets/1af9c2a207866bfd.woff2') format('woff2');
+  font-family: 'JetBrains Mono';
+  src: url('assets/fonts/jetbrains-mono.woff2') format('woff2');
   font-weight: 400 500;
   font-display: swap;
 }
@@ -113,6 +113,30 @@ img {
   display: flex;
   gap: 1.35rem;
   margin-left: auto;
+}
+.nav-toggle {
+  display: none;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  margin-left: auto;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  cursor: pointer;
+}
+.nav-toggle svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.nav-toggle-cross,
+.nav-is-open .nav-toggle-lines {
+  display: none;
+}
+.nav-is-open .nav-toggle-cross {
+  display: block;
 }
 .site-header nav a,
 .theme-switcher button {
@@ -720,6 +744,7 @@ a.speaker:hover {
 :root {
   --lightbox-max-h: min(70vh, 40rem);
 }
+
 .lightbox {
   width: min(94vw, 60rem);
   padding: 0;
@@ -760,28 +785,22 @@ a.speaker:hover {
   line-height: 1;
   cursor: pointer;
 }
-/* The frame holds the nav buttons at a fixed width; the stage inside it is
-   sized to the photo by app.js, so the buttons never move as photos change. */
-.lightbox-frame {
-  position: relative;
-  display: grid;
-  justify-items: center;
-  margin: 0 var(--space-5);
-}
+/* A fixed 3:2 window the photo fills, so every photo reads the same size and
+   paging never resizes the dialog. max-width keeps the height under the cap. */
 .lightbox-stage {
   position: relative;
   overflow: hidden;
-  width: var(--lightbox-stage-width, 100%);
-  max-width: 100%;
-  height: var(--lightbox-stage-height, var(--lightbox-max-h));
-  max-height: var(--lightbox-max-h);
+  width: calc(100% - 2 * var(--space-5));
+  max-width: calc(var(--lightbox-max-h) * 3 / 2);
+  aspect-ratio: 3 / 2;
+  margin-inline: auto;
   border-radius: var(--radius-sm);
   background: var(--color-surface-alt);
 }
 .lightbox-stage img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 .lightbox-nav {
   position: absolute;
@@ -875,13 +894,14 @@ a.speaker:hover {
 }
 .is-embedded .embed-back-link-wrap {
   display: block;
-  padding-top: var(--space-8);
+  padding-top: clamp(var(--space-10), 5vw, var(--space-16));
 }
 .is-embedded .embed-back-link {
   display: inline-flex;
 }
 .is-embedded .hero-grid {
-  padding-top: var(--space-8);
+  /* The back link supplies the top gap; the heading sits right under it. */
+  padding-top: var(--space-3);
 }
 .is-embedded {
   --lightbox-max-h: min(calc(var(--embed-viewport-height, 100vh) * 0.7), 40rem);
@@ -934,6 +954,14 @@ a.speaker:hover {
 }
 .legal-content p {
   margin: var(--space-4) 0 0;
+}
+.legal-content code {
+  padding: 0.1em 0.35em;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-alt);
+  color: var(--color-ink);
+  font: 500 0.88em var(--font-mono);
 }
 .legal-content a,
 .contact-details a {
@@ -990,11 +1018,45 @@ a.speaker:hover {
   .site-header {
     gap: var(--space-3);
   }
+  .nav-toggle {
+    display: grid;
+  }
   .site-header nav {
-    gap: 0.9rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    z-index: 11;
+    flex-direction: column;
+    gap: 0;
+    margin: 0;
+    padding: var(--space-2) clamp(1.25rem, 4vw, 2.5rem) var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-card);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-0.5rem);
+    transition:
+      opacity var(--dur-fast) var(--ease-out),
+      transform var(--dur-fast) var(--ease-out),
+      visibility var(--dur-fast) var(--ease-out);
+  }
+  .nav-is-open .site-header nav {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
   }
   .site-header nav a {
-    font-size: 0.68rem;
+    padding: 0.95rem 0;
+    border-bottom: 1px solid var(--color-divider);
+    font-size: 0.95rem;
+    font-family: var(--font-body);
+    letter-spacing: 0;
+    color: var(--color-ink);
+  }
+  .site-header nav a:last-child {
+    border-bottom: 0;
   }
   .hero-grid,
   .about-intro,
@@ -1096,9 +1158,10 @@ a.speaker:hover {
   :root {
     --lightbox-max-h: min(58vh, 26rem);
   }
-  .lightbox-frame {
-    margin: 0 var(--space-3);
+  .lightbox-stage {
+    width: calc(100% - 2 * var(--space-3));
   }
+
   .lightbox-nav {
     width: 2.75rem;
     height: 2.75rem;
