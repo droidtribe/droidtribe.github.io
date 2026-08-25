@@ -18,6 +18,7 @@
   margin: 0.25rem 0 0;
   color: var(--color-text);
   font-size: clamp(1rem, 1.35vw, 1.16rem);
+  font-weight: 600;
 }
 .founders {
   display: grid;

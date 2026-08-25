@@ -5,7 +5,7 @@ const site = {
   email: 'droidtribecommunity@gmail.com',
   // Where the "Community" link goes when the archive is embedded elsewhere.
   parentCommunityUrl: 'https://hadiyarajesh.com/community/',
-  youtube: 'https://youtube.com/@droidtribe',
+  youtube: 'https://youtube.com/@DroidTribeDevs',
   // Rendered into the footer, in this order. `icon` names an entry in the icon
   // set at the top of js/site.js.
   social: [
@@ -13,13 +13,13 @@ const site = {
     {
       label: 'LinkedIn',
       icon: 'linkedin',
-      url: 'https://www.linkedin.com/in/hadiyarajesh/'
+      url: 'https://www.linkedin.com/company/droid-tribe'
     },
     {
       label: 'YouTube',
       icon: 'youtube',
-      url: 'https://youtube.com/@droidtribe'
+      url: 'https://youtube.com/@DroidTribeDevs'
     },
-    { label: 'X', icon: 'x', url: 'https://x.com/hadiyarajesh' }
+    { label: 'X', icon: 'x', url: 'https://x.com/DroidTribeCom' }
   ]
 };

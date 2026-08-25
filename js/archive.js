@@ -26,7 +26,7 @@ if (meetupList) {
   const photoMarkup = (photo, meetup, index) => {
     const src = meetupPhoto(meetup.number, photo);
     const alt = `Meetup #${meetup.number} photo ${index + 1}`;
-    return `<button class="photo-button" type="button" data-photo="${src}" data-alt="${alt}" aria-label="Open ${alt}"><img src="${src}" alt="${alt}" loading="lazy" /></button>`;
+    return `<button class="photo-button" type="button" data-photo="${src}" data-alt="${alt}" aria-label="Open ${alt}"><img src="${src}" alt="${alt}" loading="lazy" />${icons.expand}</button>`;
   };
 
   const meetupMarkup = (meetup, index) => {

@@ -247,18 +247,22 @@ a.speaker:hover {
   height: 100%;
   object-fit: cover;
 }
-.photo-button::after {
-  content: '↗';
+.photo-expand {
   position: absolute;
   display: grid;
   place-items: center;
-  right: 0.6rem;
-  bottom: 0.6rem;
-  width: 1.8rem;
-  height: 1.8rem;
+  right: 0.625rem;
+  bottom: 0.625rem;
+  width: 1.875rem;
+  height: 1.875rem;
   border-radius: var(--radius-sm);
   background: var(--color-photo-control);
+  backdrop-filter: blur(4px);
   color: var(--color-on-accent);
+}
+.photo-expand svg {
+  width: 0.9375rem;
+  height: 0.9375rem;
 }
 .recording-link {
   display: inline-flex;
