@@ -7,16 +7,37 @@
       name="description"
       content="The terms covering use of the DroidTribe meetup archive."
     />
+    <meta name="theme-color" content="#0e1522" />
     <title>Terms of Service — DroidTribe</title>
-    <link rel="icon" href="assets/brand/logo.webp" />
-    <link rel="stylesheet" href="tokens.css?v=20260825-1630" />
-    <link rel="stylesheet" href="style.css?v=20260825-1630" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/brand/favicon-32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="256x256"
+      href="assets/brand/mark.png"
+    />
+    <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png" />
+    <link rel="stylesheet" href="css/tokens.css?v=20260826-0900" />
+    <link rel="stylesheet" href="css/base.css?v=20260826-0900" />
+    <link rel="stylesheet" href="css/header.css?v=20260826-0900" />
+    <link rel="stylesheet" href="css/hero.css?v=20260826-0900" />
+    <link rel="stylesheet" href="css/about.css?v=20260826-0900" />
+    <link rel="stylesheet" href="css/archive.css?v=20260826-0900" />
+    <link rel="stylesheet" href="css/lightbox.css?v=20260826-0900" />
+    <link rel="stylesheet" href="css/footer.css?v=20260826-0900" />
+    <link rel="stylesheet" href="css/legal.css?v=20260826-0900" />
+    <link rel="stylesheet" href="css/embed.css?v=20260826-0900" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <a class="wordmark" href="index.html" aria-label="DroidTribe home"
-        ><img src="assets/brand/logo.webp" alt="" /><span>DroidTribe</span></a
+        ><img src="assets/brand/mark.png" alt="" /><span>DroidTribe</span></a
       >
       <button
         class="nav-toggle"
@@ -53,12 +74,14 @@
         <a href="index.html#meetups">Meetups</a
         ><a
           href="https://youtube.com/@droidtribe"
+          data-site-youtube
           target="_blank"
           rel="noreferrer"
           >YouTube</a
         ><a href="index.html#about">About</a>
       </nav>
     </header>
+
     <main class="legal-page" id="main">
       <article class="shell legal-shell">
         <p class="eyebrow">Legal</p>
@@ -129,16 +152,19 @@
           <h2>Contact</h2>
           <p>
             For questions about these terms, email
-            <a href="mailto:care@hadiyarajesh.com">care@hadiyarajesh.com</a>.
+            <a data-site-email href="mailto:droidtribecommunity@gmail.com"
+              >droidtribecommunity@gmail.com</a
+            >.
           </p>
         </div>
       </article>
     </main>
+
     <footer class="footer">
       <div class="shell footer-grid">
         <div class="footer-brand">
           <a class="wordmark" href="index.html">
-            <img src="assets/brand/logo.webp" alt="" />
+            <img src="assets/brand/mark.png" alt="" />
             <span>DroidTribe</span>
           </a>
         </div>
@@ -195,7 +221,9 @@
         </div>
       </div>
       <div class="shell footer-bottom">
-        <span>© 2026 DroidTribe. All rights reserved.</span>
+        <span class="footer-copyright"
+          >© 2026 DroidTribe. All rights reserved.</span
+        >
         <div
           class="theme-switcher footer-theme-switcher"
           role="radiogroup"
@@ -249,6 +277,11 @@
         </div>
       </div>
     </footer>
-    <script src="app.js?v=20260825-1630"></script>
+    <script src="data/site.js?v=20260826-0900"></script>
+    <script src="js/env.js?v=20260826-0900"></script>
+    <script src="js/site.js?v=20260826-0900"></script>
+    <script src="js/theme.js?v=20260826-0900"></script>
+    <script src="js/nav.js?v=20260826-0900"></script>
+    <script src="js/embed.js?v=20260826-0900"></script>
   </body>
 </html>

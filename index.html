@@ -9,15 +9,35 @@
     />
     <meta name="theme-color" content="#0e1522" />
     <title>DroidTribe — Android developer community</title>
-    <link rel="icon" href="assets/brand/logo.webp" />
-    <link rel="stylesheet" href="tokens.css?v=20260825-1630" />
-    <link rel="stylesheet" href="style.css?v=20260825-1630" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/brand/favicon-32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="256x256"
+      href="assets/brand/mark.png"
+    />
+    <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png" />
+    <link rel="stylesheet" href="css/tokens.css?v=20260826-0900" />
+    <link rel="stylesheet" href="css/base.css?v=20260826-0900" />
+    <link rel="stylesheet" href="css/header.css?v=20260826-0900" />
+    <link rel="stylesheet" href="css/hero.css?v=20260826-0900" />
+    <link rel="stylesheet" href="css/about.css?v=20260826-0900" />
+    <link rel="stylesheet" href="css/archive.css?v=20260826-0900" />
+    <link rel="stylesheet" href="css/lightbox.css?v=20260826-0900" />
+    <link rel="stylesheet" href="css/footer.css?v=20260826-0900" />
+    <link rel="stylesheet" href="css/legal.css?v=20260826-0900" />
+    <link rel="stylesheet" href="css/embed.css?v=20260826-0900" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <a class="wordmark" href="#top" aria-label="DroidTribe home"
-        ><img src="assets/brand/logo.webp" alt="" /><span>DroidTribe</span></a
+        ><img src="assets/brand/mark.png" alt="" /><span>DroidTribe</span></a
       >
       <button
         class="nav-toggle"
@@ -54,6 +74,7 @@
         <a href="#meetups">Meetups</a
         ><a
           href="https://youtube.com/@droidtribe"
+          data-site-youtube
           target="_blank"
           rel="noreferrer"
           >YouTube</a
@@ -63,10 +84,12 @@
 
     <main id="main">
       <section class="hero" id="top">
+        <div class="dot-grid-bg" aria-hidden="true"></div>
         <div class="shell embed-back-link-wrap">
           <a
             class="embed-back-link"
             href="https://hadiyarajesh.com/community/"
+            data-site-community
             target="_parent"
           >
             <svg
@@ -91,11 +114,12 @@
               exchange knowledge, discover new ideas, and build lasting
               friendships through community-led meetups.
             </p>
-            <div class="stats" aria-label="Community statistics">
-              <div><strong>6</strong><span>Meetups</span></div>
-              <div><strong>3</strong><span>Cities</span></div>
-              <div><strong>24</strong><span>Talks</span></div>
-            </div>
+            <!-- Counts come from data/meetups.js via js/hero.js -->
+            <div
+              class="stats"
+              id="hero-stats"
+              aria-label="Community statistics"
+            ></div>
             <a class="button-primary" href="#meetups"
               >Explore meetups <span aria-hidden="true">→</span></a
             >
@@ -121,49 +145,8 @@
               connections within the Android community.
             </p>
           </div>
-          <div class="founders">
-            <article class="founder">
-              <figure>
-                <img
-                  src="assets/organizers/rajesh-hadiya.jpg"
-                  alt="Rajesh Hadiya, DroidTribe organizer"
-                />
-              </figure>
-              <div>
-                <p class="eyebrow">
-                  Co-founder · Engineer, educator and community organiser
-                </p>
-                <h3>Rajesh Hadiya</h3>
-                <p>
-                  Rajesh brings the practitioner’s and organiser’s perspective
-                  to DroidTribe: the real trade-offs behind shipping Android
-                  apps, teaching what he learns, and making technical
-                  conversations easier to join. He curates talks, brings people
-                  together, and keeps each meetup grounded in useful, honest
-                  engineering.
-                </p>
-              </div>
-            </article>
-            <article class="founder founder-reverse">
-              <figure>
-                <img
-                  src="assets/organizers/gaurav-thakkar.jpg"
-                  alt="Gaurav Thakkar, DroidTribe organizer"
-                />
-              </figure>
-              <div>
-                <p class="eyebrow">Co-founder · Community builder</p>
-                <h3>Gaurav Thakkar</h3>
-                <p>
-                  Gaurav brings an organiser’s eye to the community — connecting
-                  people, creating a welcoming room, and turning the idea of “we
-                  should meet more often” into something developers can rely on.
-                  He helps every gathering feel personal, practical, and open to
-                  newcomers.
-                </p>
-              </div>
-            </article>
-          </div>
+          <!-- Profiles come from data/organizers.js via js/organizers.js -->
+          <div class="founders" id="organizer-list"></div>
         </div>
       </section>
 
@@ -172,8 +155,9 @@
           <div class="section-heading">
             <p class="eyebrow">Archive</p>
             <h2 id="meetups-title">Meetups, shared</h2>
-            <p>Six gatherings across Pune, Bengaluru, and Mumbai.</p>
+            <p id="archive-summary"></p>
           </div>
+          <!-- Timeline comes from data/meetups.js via js/archive.js -->
           <div class="timeline" id="meetup-list"></div>
         </div>
       </section>
@@ -183,7 +167,7 @@
       <div class="shell footer-grid">
         <div class="footer-brand">
           <a class="wordmark" href="#top">
-            <img src="assets/brand/logo.webp" alt="" />
+            <img src="assets/brand/mark.png" alt="" />
             <span>DroidTribe</span>
           </a>
         </div>
@@ -240,7 +224,9 @@
         </div>
       </div>
       <div class="shell footer-bottom">
-        <span>© 2026 DroidTribe. All rights reserved.</span>
+        <span class="footer-copyright"
+          >© 2026 DroidTribe. All rights reserved.</span
+        >
         <div
           class="theme-switcher footer-theme-switcher"
           role="radiogroup"
@@ -357,6 +343,17 @@
         aria-live="polite"
       ></p>
     </dialog>
-    <script src="app.js?v=20260825-1630"></script>
+    <script src="data/site.js?v=20260826-0900"></script>
+    <script src="data/organizers.js?v=20260826-0900"></script>
+    <script src="data/meetups.js?v=20260826-0900"></script>
+    <script src="js/env.js?v=20260826-0900"></script>
+    <script src="js/site.js?v=20260826-0900"></script>
+    <script src="js/theme.js?v=20260826-0900"></script>
+    <script src="js/nav.js?v=20260826-0900"></script>
+    <script src="js/hero.js?v=20260826-0900"></script>
+    <script src="js/organizers.js?v=20260826-0900"></script>
+    <script src="js/archive.js?v=20260826-0900"></script>
+    <script src="js/lightbox.js?v=20260826-0900"></script>
+    <script src="js/embed.js?v=20260826-0900"></script>
   </body>
 </html>

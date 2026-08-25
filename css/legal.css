@@ -1,0 +1,87 @@
+/* Privacy policy, terms of service and contact. */
+.legal-page {
+  min-height: calc(100vh - 5.5rem);
+  padding-block: clamp(4rem, 9vw, 7rem);
+  background: var(--color-surface);
+}
+.legal-shell {
+  max-width: 48rem;
+}
+.legal-shell h1 {
+  max-width: 18ch;
+  margin: var(--space-4) 0 var(--space-3);
+  color: var(--color-ink);
+  font: 600 clamp(2.4rem, 6vw, 4.5rem)/0.98 var(--font-display);
+  letter-spacing: -0.055em;
+}
+.legal-updated {
+  margin: 0;
+  color: var(--color-faint);
+  font: 500 0.7rem/1.4 var(--font-mono);
+  letter-spacing: 0.04em;
+}
+.legal-lede {
+  max-width: 48rem;
+  margin: var(--space-5) 0 0;
+  color: var(--color-muted);
+  font-size: clamp(1.05rem, 2.3vw, 1.25rem);
+  line-height: 1.6;
+}
+.legal-content {
+  margin-top: var(--space-10);
+  color: var(--color-muted);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+.legal-content h2 {
+  margin: var(--space-10) 0 var(--space-3);
+  color: var(--color-ink);
+  font: 600 clamp(1.35rem, 3vw, 1.75rem)/1.15 var(--font-display);
+  letter-spacing: -0.03em;
+}
+.legal-content p {
+  margin: var(--space-4) 0 0;
+}
+.legal-content code {
+  padding: 0.1em 0.35em;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-alt);
+  color: var(--color-ink);
+  font: 500 0.88em var(--font-mono);
+}
+.legal-content a,
+.contact-details a {
+  color: var(--color-accent-deep);
+  text-underline-offset: 0.2rem;
+}
+.contact-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+  margin-top: var(--space-10);
+}
+.contact-details div {
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+.contact-details span {
+  display: block;
+  margin-bottom: var(--space-2);
+  color: var(--color-faint);
+  font: 500 0.62rem/1 var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.contact-details p {
+  margin: 0;
+  color: var(--color-ink);
+}
+
+@media (max-width: 48rem) {
+  .contact-details {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

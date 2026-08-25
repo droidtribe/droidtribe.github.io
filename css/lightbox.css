@@ -1,0 +1,140 @@
+/* Photo viewer. The stage is a fixed 3:2 window the photo covers, so every
+   photo reads the same size and paging never resizes the dialog. */
+:root {
+  --lightbox-max-h: min(70vh, 40rem);
+}
+.lightbox {
+  width: min(94vw, 60rem);
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-lightbox);
+}
+.lightbox::backdrop {
+  background: var(--color-overlay);
+  backdrop-filter: blur(0.35rem);
+}
+.lightbox-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-5);
+}
+.lightbox-head p {
+  margin: 0;
+  color: var(--color-faint);
+  font: 500 0.65rem/1 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.icon-button {
+  display: grid;
+  width: 2.1rem;
+  height: 2.1rem;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-alt);
+  color: var(--color-ink);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.lightbox-stage {
+  position: relative;
+  overflow: hidden;
+  /* max-width keeps the 3:2 height under the cap on short viewports. */
+  width: calc(100% - 2 * var(--space-5));
+  max-width: calc(var(--lightbox-max-h) * 3 / 2);
+  aspect-ratio: 3 / 2;
+  margin-inline: auto;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-alt);
+}
+.lightbox-stage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.lightbox-nav {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  top: 50%;
+  z-index: 1;
+  width: 2.6rem;
+  height: 2.6rem;
+  padding: 0;
+  transform: translateY(-50%);
+  transition: none;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-lightbox-control);
+  color: var(--color-on-accent);
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-appearance: none;
+  appearance: none;
+}
+/* Reasserted so no later :active rule can knock the button off centre. */
+.lightbox-nav:active {
+  transform: translateY(-50%);
+}
+.lightbox-nav svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.lightbox-nav.prev {
+  left: 0.75rem;
+}
+.lightbox-nav.next {
+  right: 0.75rem;
+}
+.lightbox-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.38rem;
+  padding: var(--space-4);
+}
+.lightbox-dot {
+  width: 0.56rem;
+  height: 0.56rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-border);
+  cursor: pointer;
+  transition:
+    width var(--dur-fast) var(--ease-out),
+    background var(--dur-fast) var(--ease-out);
+}
+.lightbox-dot.is-active {
+  width: 1.6rem;
+  background: var(--color-accent);
+}
+
+@media (max-width: 34rem) {
+  :root {
+    --lightbox-max-h: min(58vh, 26rem);
+  }
+  .lightbox {
+    width: min(96vw, 60rem);
+  }
+  .lightbox-head {
+    padding: var(--space-3) var(--space-4);
+  }
+  .lightbox-stage {
+    width: calc(100% - 2 * var(--space-3));
+  }
+  .lightbox-nav {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+  .icon-button {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}

@@ -1,0 +1,55 @@
+/* Content-only mode (?embed=1): the archive rendered inside an iframe on
+   another page. The frame never scrolls itself — the parent sizes it from a
+   posted content height — so anything viewport-tall has to be neutralised. */
+.is-embedded,
+.is-embedded body {
+  overflow: hidden;
+}
+.is-embedded .site-header,
+.is-embedded .footer,
+.is-embedded .skip-link {
+  display: none;
+}
+.embed-back-link-wrap {
+  display: none;
+}
+.embed-back-link {
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--color-muted);
+  font: 500 0.7rem/1 var(--font-mono);
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.embed-back-link svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+.is-embedded .embed-back-link {
+  display: inline-flex;
+}
+/* Lines the back link and heading up with the same pair on the host site. */
+.is-embedded .embed-back-link-wrap {
+  display: block;
+  padding-top: clamp(var(--space-16), 9.5vw, 7.5rem);
+}
+.is-embedded .hero-grid {
+  padding-top: var(--space-3);
+}
+/* `vh` inside the iframe spans the whole document, so viewport-tall floors
+   would keep inflating the height reported to the parent. */
+.is-embedded .legal-page {
+  min-height: 0;
+}
+.is-embedded {
+  --lightbox-max-h: min(calc(var(--embed-viewport-height, 100vh) * 0.7), 40rem);
+}
+.is-embedded .lightbox {
+  position: absolute;
+  inset: auto auto auto 50%;
+  top: var(--embed-modal-top, 50vh);
+  margin: 0;
+  max-height: calc(var(--embed-viewport-height, 100vh) - 2rem);
+  transform: translate(-50%, -50%);
+}

@@ -1,0 +1,328 @@
+/* The meetup archive: timeline spine, expandable meetup cards, speaker grid
+   and the horizontal photo strip. */
+.archive {
+  padding-block: clamp(var(--space-16), 8vw, var(--space-24));
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface-alt);
+}
+.section-heading {
+  margin-bottom: var(--space-10);
+}
+.section-heading h2 {
+  margin-top: var(--space-3);
+}
+.section-heading > p:last-child {
+  margin: var(--space-4) 0 0;
+  color: var(--color-muted);
+}
+.timeline {
+  position: relative;
+  display: grid;
+  gap: var(--space-4);
+  padding-left: 4rem;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 1.32rem;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 2px;
+  background: linear-gradient(var(--color-ink), var(--color-border));
+}
+.meetup {
+  position: relative;
+}
+.meetup-mark {
+  position: absolute;
+  z-index: 1;
+  left: -4rem;
+  top: 1.06rem;
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 3px solid var(--color-surface-alt);
+  border-radius: 0.75rem;
+  background: var(--color-ink);
+  box-shadow: 0 0 0 1px var(--color-border);
+  color: var(--color-surface);
+  font: 600 1rem/1 var(--font-display);
+}
+.meetup.is-open .meetup-mark {
+  background: var(--color-accent);
+}
+.meetup-card {
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  cursor: pointer;
+  transition:
+    border-color var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+.meetup-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  border: 0;
+  padding: 1.25rem clamp(1.15rem, 3vw, 1.75rem);
+  color: var(--color-ink);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+.meetup-title-row,
+.meetup-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.meetup-title {
+  font: 600 clamp(1.4rem, 2.5vw, 2rem)/1 var(--font-display);
+  letter-spacing: -0.03em;
+}
+.city-chip,
+.host-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.62rem;
+  border: 1px solid var(--color-chip-border);
+  border-radius: var(--radius-pill);
+  color: var(--color-accent-deep);
+  background: var(--color-chip);
+  font: 500 0.57rem/1 var(--font-mono);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.host-chip {
+  padding: 0.21rem 0.35rem;
+  font-size: 0.48rem;
+}
+.meetup-date {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.4rem;
+  color: var(--color-muted);
+  font: 500 0.75rem/1.3 var(--font-mono);
+  letter-spacing: 0.03em;
+}
+.meetup-date-part {
+  white-space: nowrap;
+}
+.chevron {
+  color: var(--color-faint);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
+}
+.meetup.is-open .chevron {
+  transform: rotate(180deg);
+  color: var(--color-accent);
+}
+.venue {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0 clamp(1.15rem, 3vw, 1.75rem) 1rem;
+  color: var(--color-muted);
+  font-size: 0.85rem;
+}
+.meetup.is-open .venue {
+  border-bottom: 1px solid var(--color-divider);
+}
+.venue-label {
+  color: var(--color-faint);
+  font: 500 0.58rem/1 var(--font-mono);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.venue a {
+  color: var(--color-accent-deep);
+  text-underline-offset: 0.2rem;
+}
+.map-pin {
+  flex: 0 0 auto;
+  width: 0.82rem;
+  height: 0.82rem;
+  color: var(--color-accent-deep);
+}
+.city-chip .map-pin {
+  width: 0.72rem;
+  height: 0.72rem;
+}
+.meetup-panel {
+  display: grid;
+  gap: var(--space-8);
+  padding: clamp(1.15rem, 3vw, 1.75rem);
+}
+.meetup-panel[hidden] {
+  display: none;
+}
+.panel-label {
+  margin: 0 0 var(--space-4);
+  color: var(--color-faint);
+  font: 500 0.62rem/1 var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.speaker-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+.speaker {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  min-width: 0;
+  padding: 0.4rem;
+  margin: -0.4rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+a.speaker:hover {
+  background: var(--color-chip);
+}
+.speaker img {
+  flex: 0 0 auto;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--color-chip);
+}
+.speaker-name {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--color-ink);
+  font-weight: 600;
+  line-height: 1.25;
+}
+.speaker-topic {
+  margin: 0.2rem 0 0;
+  color: var(--color-muted);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+.photo-strip {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding: 0.1rem 0 0.65rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-color: var(--color-muted) transparent;
+}
+.photo-button {
+  position: relative;
+  flex: 0 0 min(72%, 18.75rem);
+  min-width: 0;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-chip);
+  cursor: zoom-in;
+  scroll-snap-align: start;
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+.photo-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-photo);
+}
+.photo-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.photo-button::after {
+  content: '↗';
+  position: absolute;
+  display: grid;
+  place-items: center;
+  right: 0.6rem;
+  bottom: 0.6rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-photo-control);
+  color: var(--color-on-accent);
+}
+.recording-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-divider);
+  color: var(--color-accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+.recording-icon {
+  flex: 0 0 auto;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+@media (max-width: 48rem) {
+  .speaker-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 34rem) {
+  .timeline {
+    padding-left: 3.15rem;
+  }
+  .timeline::before {
+    left: 1rem;
+  }
+  .meetup-mark {
+    left: -3.15rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 0.6rem;
+  }
+  /* Stack title above date so the date never squeezes into a narrow column,
+     and pin the chevron to the title line instead of the date line. */
+  .meetup-trigger {
+    position: relative;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .meetup-title-row {
+    gap: 0.55rem;
+    padding-right: 2rem;
+  }
+  .meetup-meta {
+    width: 100%;
+  }
+  .meetup-date {
+    text-align: left;
+    font-size: 0.7rem;
+  }
+  .chevron {
+    position: absolute;
+    top: 1.45rem;
+    right: clamp(1.15rem, 3vw, 1.75rem);
+  }
+  .speaker-topic {
+    font-size: 0.875rem;
+  }
+  .photo-button {
+    flex-basis: min(84%, 18.75rem);
+  }
+}

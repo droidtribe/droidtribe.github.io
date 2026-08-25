@@ -1,100 +1,59 @@
-# DroidTribe
+<p align="center">
+  <img src="assets/brand/droidtribe-logo.jpg" alt="DroidTribe" width="200" />
+</p>
 
-The website for [DroidTribe](https://droidtribe.github.io) — an Android
-developer community that runs free, community-led meetups in Pune, Bengaluru and
-Mumbai. The site is an archive of every meetup so far: the talks, who gave them,
-photos from the day, and links to the recordings.
+<h1 align="center">DroidTribe</h1>
 
-## Contents
+<p align="center">
+  An Android developer community that meets in Pune, Bengaluru and Mumbai.<br />
+  <a href="https://droidtribe.github.io">droidtribe.github.io</a>
+</p>
 
-| Path                                                            | What it is                                                      |
-| --------------------------------------------------------------- | --------------------------------------------------------------- |
-| `index.html`                                                    | The whole site — hero, organisers, and the meetup archive       |
-| `app.js`                                                        | Meetup data plus the accordion, photo viewer and theme switcher |
-| `style.css`                                                     | All styling                                                     |
-| `tokens.css`                                                    | Design tokens — colours, spacing, type, radii, motion           |
-| `assets/`                                                       | Fonts and images, grouped by what they belong to                |
-| `contact.html`, `privacy-policy.html`, `terms-of-services.html` | Supporting pages                                                |
+---
 
-No build step, no dependencies, no framework. Three files and a folder of
-assets; every font and image is served from this repository.
+DroidTribe runs free, community-led meetups for Android developers. This is the
+website behind them: an archive of every meetup so far — the talks, who gave
+them, photos from the day, and links to the recordings.
+
+## What's here
+
+| Path                                                            | What it is                                          |
+| --------------------------------------------------------------- | --------------------------------------------------- |
+| `index.html`                                                    | The site — hero, organisers, and the meetup archive |
+| `data/`                                                         | The content: site details, organisers, meetups      |
+| `css/`                                                          | Styles, one file per area of the page               |
+| `js/`                                                           | Behaviour, one file per feature                     |
+| `assets/`                                                       | Fonts and images, grouped by what they belong to    |
+| `contact.html`, `privacy-policy.html`, `terms-of-services.html` | Supporting pages                                    |
+| `docs/maintaining.md`                                           | How to update the site                              |
+
+No build step, no dependencies, no framework — plain HTML, CSS and JavaScript,
+with every font and image served from this repository.
 
 ## Running it locally
 
-Open `index.html` in a browser, or serve the folder over HTTP so relative paths
-behave exactly as they do in production:
+Serve the folder over HTTP so relative paths behave exactly as they do in
+production:
 
 ```bash
 python3 -m http.server 4180
 ```
 
-Then visit `http://localhost:4180`.
+Then open `http://localhost:4180`.
 
-## Assets
+## Design
 
-```
-assets/
-  brand/        the DroidTribe mark
-  fonts/        Bricolage Grotesque, Hanken Grotesk, JetBrains Mono
-  hero/         hero illustration
-  organizers/   organiser portraits
-  speakers/     speaker headshots, shared across meetups
-  meetup-1/ … meetup-6/   photos from each meetup, numbered in display order
-```
-
-Speaker headshots live in one shared folder because most speakers appear at more
-than one meetup. Meetup photos are per-meetup.
-
-## Adding a meetup
-
-Everything about a meetup lives in the `meetups` array at the top of `app.js`,
-newest first. To add one:
-
-1. Drop the photos into `assets/meetup-<n>/` as `photo-01`, `photo-02`, … in the
-   order you want them shown. Around 1280px wide is plenty.
-2. Add any new speaker headshots to `assets/speakers/`, named after the speaker
-   (`first-last.jpg`), roughly square and about 400px.
-3. Prepend an entry to `meetups`:
-
-```js
-{
-  number: 7,
-  city: 'Pune',
-  venue: 'Venue name',
-  date: '1 January, 2027 · 11 AM - 5 PM',
-  map: 'https://maps.app.goo.gl/…',
-  recording: 'https://youtube.com/playlist?list=…', // omit if there is none
-  speakers: [
-    ['Speaker Name', 'Talk title', 'https://www.linkedin.com/in/…', 'speaker-name.jpg']
-  ],
-  photos: ['photo-01.jpg', 'photo-02.jpg']
-}
-```
-
-4. Update the counts in the hero `.stats` block in `index.html`, and the line
-   under the "Meetups, shared" heading if the list of cities changed.
-
-A speaker's profile link is optional — pass an empty string and the entry
-renders without a link. The name that matches `HOST` in `app.js` gets the "Host"
-chip.
-
-## Design notes
-
-Colours, spacing and type all come from custom properties in `tokens.css`, with
-a full set for light and another for dark under `:root[data-theme='dark']`.
-Nothing in `style.css` hardcodes a colour, so retheming the site means editing
-one file. The theme switcher in the footer writes the visitor's choice to
-`localStorage` and defaults to dark.
-
-## Publishing
-
-`.github/workflows/deploy.yml` publishes this folder to GitHub Pages on every
-push to `main`. There is nothing to build, so the workflow just uploads the
-repository as-is.
+Every colour, space, radius and easing comes from custom properties in
+`css/tokens.css`, with a full palette for light and another for dark. Nothing
+else hardcodes a colour, so retheming the site means editing one file. The
+switcher in the footer remembers each visitor's choice and defaults to dark.
 
 ## Contributing
 
 Spotted a wrong talk title, a broken link, or a photo you would rather not be
 in? Open an issue or email
-[care@hadiyarajesh.com](mailto:care@hadiyarajesh.com) — photo removal requests
-need no explanation.
+[droidtribecommunity@gmail.com](mailto:droidtribecommunity@gmail.com) — photo
+removal requests need no explanation.
+
+Adding a meetup, a speaker or an organiser is documented in
+[docs/maintaining.md](docs/maintaining.md).

@@ -1,0 +1,84 @@
+/* Design tokens. Every colour, space, radius and easing the site uses lives
+   here — nothing else hardcodes a colour. The palette mirrors the tones used on
+   hadiyarajesh.com so the archive looks identical when embedded there. */
+:root {
+  --color-ink: #16233c;
+  --color-text: #56616f;
+  --color-muted: #6b7793;
+  --color-faint: #737c8f;
+  --color-accent: #2a6fe4;
+  --color-accent-deep: #1b4fb0;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f7f9fc;
+  --color-border: #e8ecf2;
+  --color-divider: #edf1f6;
+  --color-chip: #f4f8ff;
+  --color-chip-border: #dce6f8;
+  --color-dot-grid: #d6e2f4;
+  --color-highlight: rgba(42, 111, 228, 0.16);
+  --color-footer: #0f1b30;
+  --color-success: #23a35a;
+  --color-overlay: rgba(12, 19, 32, 0.7);
+  --color-on-accent: #ffffff;
+  --color-footer-text: #c9d4e6;
+  --color-footer-muted: #9fadc4;
+  --color-footer-faint: #8d9ab2;
+  --color-footer-rule: #2a3a56;
+  --color-photo-control: rgba(14, 21, 34, 0.66);
+  --color-lightbox-control: rgba(14, 21, 34, 0.65);
+  --shadow-accent: 0 0.65rem 1.35rem rgba(42, 111, 228, 0.28);
+  --shadow-hero: 0 30px 60px rgba(22, 36, 60, 0.16);
+  --shadow-founder: 0 1.4rem 2.8rem rgba(22, 36, 60, 0.15);
+  --shadow-card: 0 20px 40px rgba(22, 36, 60, 0.12);
+  --shadow-photo: 0 0.8rem 1.75rem rgba(22, 36, 60, 0.16);
+  --shadow-lightbox: 0 2.5rem 6rem rgba(10, 18, 30, 0.48);
+  --font-display: 'Bricolage Grotesque', Arial, sans-serif;
+  --font-body: 'Hanken Grotesk', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.125rem;
+  --radius-pill: 999px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 160ms;
+  --dur-base: 240ms;
+}
+
+:root[data-theme='dark'] {
+  --color-ink: #edf1f8;
+  --color-text: #c4ccdb;
+  --color-muted: #8993a7;
+  --color-faint: #8993a7;
+  --color-accent: #4c8df6;
+  --color-accent-deep: #78abfb;
+  --color-surface: #0e1522;
+  --color-surface-alt: #151e2e;
+  --color-border: #253044;
+  --color-divider: #1e2839;
+  --color-chip: #16233c;
+  --color-chip-border: #29395b;
+  --color-dot-grid: #202e48;
+  --color-footer: #090e18;
+  --color-success: #34c06e;
+  --color-overlay: rgba(5, 9, 16, 0.84);
+  --shadow-accent: 0 0.65rem 1.35rem rgba(42, 111, 228, 0.4);
+  --shadow-hero: 0 30px 60px rgba(0, 0, 0, 0.55);
+  --shadow-founder: 0 1.4rem 2.8rem rgba(0, 0, 0, 0.44);
+  --shadow-card: 0 20px 40px rgba(0, 0, 0, 0.5);
+  --shadow-photo: 0 0.8rem 1.75rem rgba(0, 0, 0, 0.45);
+  --shadow-lightbox: 0 2.5rem 6rem rgba(0, 0, 0, 0.72);
+}
