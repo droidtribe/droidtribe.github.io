@@ -17,15 +17,15 @@ them, photos from the day, and links to the recordings.
 
 ## What's here
 
-| Path                                                            | What it is                                          |
-| --------------------------------------------------------------- | --------------------------------------------------- |
-| `index.html`                                                    | The site — hero, organisers, and the meetup archive |
-| `data/`                                                         | The content: site details, organisers, meetups      |
-| `css/`                                                          | Styles, one file per area of the page               |
-| `js/`                                                           | Behaviour, one file per feature                     |
-| `assets/`                                                       | Fonts and images, grouped by what they belong to    |
-| `contact.html`, `privacy-policy.html`, `terms-of-services.html` | Supporting pages                                    |
-| `docs/maintaining.md`                                           | How to update the site                              |
+| Path                  | What it is                                          |
+| --------------------- | --------------------------------------------------- |
+| `index.html`          | The site — hero, organisers, and the meetup archive |
+| `data/`               | The content: site details, organisers, meetups      |
+| `css/`                | Styles, one file per area of the page               |
+| `js/`                 | Behaviour, one file per feature                     |
+| `assets/`             | Fonts and images, grouped by what they belong to    |
+| `support/`            | Contact, privacy policy, terms of service           |
+| `docs/maintaining.md` | How to update the site                              |
 
 No build step, no dependencies, no framework — plain HTML, CSS and JavaScript,
 with every font and image served from this repository.

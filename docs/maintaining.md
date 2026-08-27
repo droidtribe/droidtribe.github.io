@@ -95,6 +95,22 @@ css/embed.css      content-only mode
 They are linked individually from each page, in that order. Add a new file to
 every page's `<head>` if you add one.
 
+## Page layout
+
+`index.html` sits at the root; the supporting pages live in `support/`:
+
+```
+index.html
+support/contact.html
+support/privacy-policy.html
+support/terms-of-services.html
+```
+
+Because the support pages are one level down, their links to anything shared
+are prefixed — `../css/…`, `../js/…`, `../data/…`, `../assets/…`,
+`../index.html`. They link to each other with plain relative names. A new page
+in `support/` is easiest to start by copying an existing one.
+
 ## Brand assets
 
 `assets/brand/` holds the logo and its derivatives:
@@ -123,6 +139,9 @@ jumps over because the frame cannot scroll itself. See `js/embed.js` and
 
 `.github/workflows/deploy.yml` publishes the repository to GitHub Pages on every
 push to `main`. Nothing is built, so the workflow just uploads the folder.
+
+`.hallmark/` is a local scratch directory and is gitignored — it is not part of
+the published site.
 
 Note that GitHub Pages serves with `cache-control: max-age=600` and its CDN
 ignores query strings, so a change can take up to ten minutes to appear even
