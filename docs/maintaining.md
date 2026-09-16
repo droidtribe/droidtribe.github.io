@@ -16,22 +16,34 @@ from the other.
    `photo-02`, … in the order you want them shown. Around 1280px on the long
    edge is plenty; keep each one under about 300KB.
 
-2. **New speakers.** Add headshots to `assets/speakers/`, named after the
-   speaker (`first-last.jpg`), roughly square and about 400px. Speakers who have
-   spoken before already have a file — reuse it rather than adding a second copy.
+2. **New speakers.** Add headshots to `assets/speakers/` as `first-last.jpg`,
+   cropped square around the face at about 400px — they render as small circles,
+   so a centre crop of a full-length photo will land on someone's torso.
+   Speakers who have spoken before already have a file; reuse it rather than
+   adding a second copy. That is why headshots live in one shared folder instead
+   of per-meetup ones — most speakers come back.
 
 3. **Data.** Prepend an entry to the `meetups` array in `data/meetups.js`:
 
 ```js
 {
-  number: 7,
+  number: 8,
   city: 'Pune',
   venue: 'Venue name',
   date: '1 January, 2027 · 11 AM - 5 PM',
   map: 'https://maps.app.goo.gl/…',
-  recording: 'https://youtube.com/playlist?list=…', // omit if there is none
-  speakers: [
-    ['Speaker Name', 'Talk title', 'https://www.linkedin.com/in/…', 'speaker-name.jpg']
+  recording: 'https://youtube.com/playlist?list=…',
+  talks: [
+    {
+      title: 'Talk title',
+      speakers: [
+        {
+          name: 'Speaker Name',
+          url: 'https://www.linkedin.com/in/…',
+          photo: 'speaker-name.jpg'
+        }
+      ]
+    }
   ],
   photos: ['photo-01.jpg', 'photo-02.jpg']
 }
@@ -41,10 +53,17 @@ That's the whole job. The hero counts (meetups, cities, talks) and the line
 under "Meetups, shared" are all derived from this array, so they update
 themselves.
 
-Two details worth knowing:
+A few details worth knowing:
 
-- A speaker's profile URL is optional — pass an empty string and the entry
-  renders without a link.
+- **A talk can have more than one speaker.** Put both in the same `speakers`
+  array and it stays one talk in the counts, rendered with their headshots
+  overlapped and each name linked separately.
+- **`recording`** takes a playlist URL, or the string `'soon'` while the videos
+  are still being edited — that renders "Recordings coming soon on YouTube"
+  pointing at the channel. Leave the key out entirely if there is no recording.
+- **`photos` can be empty** if the pictures are not in yet; the Photos section
+  is skipped until there is at least one.
+- A speaker's `url` is optional — leave it out and the name renders unlinked.
 - The name matching `HOST` in `js/archive.js` gets the "Host" chip.
 
 ## Adding or changing an organiser

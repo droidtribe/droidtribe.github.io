@@ -4,7 +4,7 @@ const heroStats = document.querySelector('#hero-stats');
 
 if (heroStats) {
   const cities = new Set(meetups.map((meetup) => meetup.city));
-  const talks = meetups.reduce((total, m) => total + m.speakers.length, 0);
+  const talks = meetups.reduce((total, m) => total + m.talks.length, 0);
   const stats = [
     [meetups.length, 'Meetups'],
     [cities.size, 'Cities'],

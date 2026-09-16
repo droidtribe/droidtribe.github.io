@@ -7,12 +7,33 @@ const meetupPhoto = (number, file) => `${ASSETS}meetup-${number}/${file}`;
 const HOST = 'Rajesh Hadiya';
 
 if (meetupList) {
-  const speakerMarkup = ([name, topic, href, photo]) => {
-    const hostChip = name === HOST ? '<span class="host-chip">Host</span>' : '';
-    const content = `<img src="${speakerPhoto(photo)}" alt="${name}" loading="lazy" /><span><span class="speaker-name">${name}${hostChip}</span><span class="speaker-topic">${topic}</span></span>`;
-    return href
-      ? `<a class="speaker" href="${href}" target="_blank" rel="noreferrer">${content}</a>`
-      : `<div class="speaker">${content}</div>`;
+  const nameMarkup = ({ name, url }) =>
+    url
+      ? `<a href="${url}" target="_blank" rel="noreferrer">${name}</a>`
+      : `<span>${name}</span>`;
+
+  // A talk given by one person is a single link across the whole row. A joint
+  // talk stacks the headshots and links each name on its own, because the row
+  // no longer points at one place.
+  const talkMarkup = ({ title, speakers }) => {
+    const hostChip = speakers.some((s) => s.name === HOST)
+      ? '<span class="host-chip">Host</span>'
+      : '';
+    const avatars = speakers
+      .map(
+        (s) =>
+          `<img src="${speakerPhoto(s.photo)}" alt="${s.name}" loading="lazy" />`
+      )
+      .join('');
+    const solo = speakers.length === 1;
+    const names = solo
+      ? speakers[0].name
+      : speakers.map(nameMarkup).join('<span aria-hidden="true">&</span>');
+    const body = `<span class="speaker-avatars">${avatars}</span><span><span class="speaker-name">${names}${hostChip}</span><span class="speaker-topic">${title}</span></span>`;
+    if (solo && speakers[0].url) {
+      return `<a class="speaker" href="${speakers[0].url}" target="_blank" rel="noreferrer">${body}</a>`;
+    }
+    return `<div class="speaker${solo ? '' : ' speaker-group'}">${body}</div>`;
   };
 
   // Split on the middot so a narrow card breaks between day and time,
@@ -31,10 +52,17 @@ if (meetupList) {
 
   const meetupMarkup = (meetup, index) => {
     const open = index === 0;
-    const recording = meetup.recording
-      ? `<a class="recording-link" href="${meetup.recording}" target="_blank" rel="noreferrer">${icons.recording}<span>Watch recordings</span></a>`
+    const recording =
+      meetup.recording === 'soon'
+        ? `<a class="recording-link" href="${site.youtube}" target="_blank" rel="noreferrer">${icons.recording}<span>Recordings coming soon on YouTube</span></a>`
+        : meetup.recording
+          ? `<a class="recording-link" href="${meetup.recording}" target="_blank" rel="noreferrer">${icons.recording}<span>Watch recordings</span></a>`
+          : '';
+    // A meetup can sit here before its photos are in.
+    const photos = meetup.photos?.length
+      ? `<div><p class="panel-label">Photos</p><div class="photo-strip">${meetup.photos.map((photo, i) => photoMarkup(photo, meetup, i)).join('')}</div></div>`
       : '';
-    return `<article class="meetup${open ? ' is-open' : ''}"><span class="meetup-mark" aria-hidden="true">${meetup.number}</span><div class="meetup-card"><button class="meetup-trigger" type="button" aria-expanded="${open}" aria-controls="meetup-${meetup.number}"><span class="meetup-title-row"><span class="meetup-title">Meetup #${meetup.number}</span><span class="city-chip">${icons.mapPin} ${meetup.city}</span></span><span class="meetup-meta"><span class="meetup-date">${dateMarkup(meetup.date)}</span><span class="chevron" aria-hidden="true">⌄</span></span></button><div class="venue">${icons.mapPin}<span class="venue-label">Venue</span><a href="${meetup.map}" target="_blank" rel="noreferrer">${meetup.venue}</a></div><div class="meetup-panel" id="meetup-${meetup.number}"${open ? '' : ' hidden'}><div><p class="panel-label">Speakers</p><div class="speaker-grid">${meetup.speakers.map(speakerMarkup).join('')}</div></div><div><p class="panel-label">Photos</p><div class="photo-strip">${meetup.photos.map((photo, i) => photoMarkup(photo, meetup, i)).join('')}</div></div>${recording}</div></div></article>`;
+    return `<article class="meetup${open ? ' is-open' : ''}"><span class="meetup-mark" aria-hidden="true">${meetup.number}</span><div class="meetup-card"><button class="meetup-trigger" type="button" aria-expanded="${open}" aria-controls="meetup-${meetup.number}"><span class="meetup-title-row"><span class="meetup-title">Meetup #${meetup.number}</span><span class="city-chip">${icons.mapPin} ${meetup.city}</span></span><span class="meetup-meta"><span class="meetup-date">${dateMarkup(meetup.date)}</span><span class="chevron" aria-hidden="true">⌄</span></span></button><div class="venue">${icons.mapPin}<span class="venue-label">Venue</span><a href="${meetup.map}" target="_blank" rel="noreferrer">${meetup.venue}</a></div><div class="meetup-panel" id="meetup-${meetup.number}"${open ? '' : ' hidden'}><div><p class="panel-label">Talks</p><div class="speaker-grid">${meetup.talks.map(talkMarkup).join('')}</div></div>${photos}${recording}</div></div></article>`;
   };
 
   meetupList.innerHTML = meetups.map(meetupMarkup).join('');

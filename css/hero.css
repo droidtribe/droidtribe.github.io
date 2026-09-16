@@ -6,7 +6,7 @@
 }
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.82fr);
+  grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.98fr);
   align-items: center;
   gap: clamp(var(--space-10), 7vw, var(--space-24));
   padding-block: clamp(var(--space-12), 8vw, var(--space-24));

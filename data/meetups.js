@@ -1,8 +1,67 @@
 /* Every meetup, newest first. Photos live in assets/meetup-<number>/ and
    speaker headshots in assets/speakers/. Hero counts and the archive
    subheading are derived from this list, so adding an entry is enough.
-   Each speaker is [name, talk, profile URL (optional), headshot file]. */
+
+   A talk has one title and one or more speakers — a session given by two
+   people is one talk, not two. `recording` is a playlist URL, the string
+   'soon' while the videos are still being edited, or left out entirely. */
 const meetups = [
+  {
+    number: 7,
+    city: 'Bengaluru',
+    venue: 'PhonePe',
+    date: '12 September, 2026 · 11 AM - 5 PM',
+    map: 'https://maps.app.goo.gl/MDgH4NnWY6E51xfP9',
+    recording: 'soon',
+    talks: [
+      {
+        title: 'RAG for the Pocket: Pushing Gemma to the Limit',
+        speakers: [
+          {
+            name: 'Belal Khan',
+            url: 'https://www.linkedin.com/in/probelalkhan/',
+            photo: 'belal-khan.jpg'
+          }
+        ]
+      },
+      {
+        title: 'The Wild future of digital identity and authentication',
+        speakers: [
+          {
+            name: 'Niharika Arora',
+            url: 'https://www.linkedin.com/in/thedroidlady/',
+            photo: 'niharika-arora.jpg'
+          },
+          {
+            name: 'Ruchika Tiwari',
+            url: 'https://www.linkedin.com/in/ruchika-tiwari/',
+            photo: 'ruchika-tiwari.jpg'
+          }
+        ]
+      },
+      {
+        title: 'Jetpack Compose Graphics: Production pitfalls & solutions',
+        speakers: [
+          {
+            name: 'Rahul Ray',
+            url: 'https://www.linkedin.com/in/raystatic/',
+            photo: 'rahul-ray.jpg'
+          }
+        ]
+      },
+      {
+        title: 'From @mention to root cause: Agentic debugging over slack',
+        speakers: [
+          {
+            name: 'Abhinav Raj',
+            url: 'https://www.linkedin.com/in/abhinav-raj-234497159/',
+            photo: 'abhinav-raj.jpg'
+          }
+        ]
+      }
+    ],
+    photos: []
+  },
   {
     number: 6,
     city: 'Pune',
@@ -11,31 +70,47 @@ const meetups = [
     map: 'https://maps.app.goo.gl/HVFnEuwW4NTJWAXt8',
     recording:
       'https://youtube.com/playlist?list=PLqIWi4seAoxJ-MHJZiGyWxb7CiPpriHn9',
-    speakers: [
-      [
-        'Belal Khan',
-        'From Hugging Face to APK: Pipeline for Local Android AI',
-        'https://www.linkedin.com/in/probelalkhan/',
-        'belal-khan.jpg'
-      ],
-      [
-        'Prakhar Gandhi',
-        'NFC Integration with Jetpack Compose and KMP',
-        'https://www.linkedin.com/in/prakhargandhi14/',
-        'prakhar-gandhi.jpg'
-      ],
-      [
-        'Rajesh Hadiya',
-        'CI/CD for Android Developers',
-        'https://www.linkedin.com/in/hadiyarajesh/',
-        'rajesh-hadiya.jpg'
-      ],
-      [
-        'Gaurav Thakkar',
-        'Blazing Fast Gradle Builds for Android',
-        'https://www.linkedin.com/in/gaurav-thakkar/',
-        'gaurav-thakkar.jpg'
-      ]
+    talks: [
+      {
+        title: 'From Hugging Face to APK: Pipeline for Local Android AI',
+        speakers: [
+          {
+            name: 'Belal Khan',
+            url: 'https://www.linkedin.com/in/probelalkhan/',
+            photo: 'belal-khan.jpg'
+          }
+        ]
+      },
+      {
+        title: 'NFC Integration with Jetpack Compose and KMP',
+        speakers: [
+          {
+            name: 'Prakhar Gandhi',
+            url: 'https://www.linkedin.com/in/prakhargandhi14/',
+            photo: 'prakhar-gandhi.jpg'
+          }
+        ]
+      },
+      {
+        title: 'CI/CD for Android Developers',
+        speakers: [
+          {
+            name: 'Rajesh Hadiya',
+            url: 'https://www.linkedin.com/in/hadiyarajesh/',
+            photo: 'rajesh-hadiya.jpg'
+          }
+        ]
+      },
+      {
+        title: 'Blazing Fast Gradle Builds for Android',
+        speakers: [
+          {
+            name: 'Gaurav Thakkar',
+            url: 'https://www.linkedin.com/in/gaurav-thakkar/',
+            photo: 'gaurav-thakkar.jpg'
+          }
+        ]
+      }
     ],
     photos: [
       'photo-01.jpg',
@@ -53,31 +128,47 @@ const meetups = [
     map: 'https://maps.app.goo.gl/75568rBuHnHNr2GT9',
     recording:
       'https://youtube.com/playlist?list=PLqIWi4seAoxLoEl9_CtCNaJEijxAOI8Ri',
-    speakers: [
-      [
-        'Avik Mukherjee',
-        'Owning a Legacy Android Codebase in 2025',
-        'https://www.linkedin.com/in/avikmukherjee-android-dev/',
-        'avik-mukherjee.jpg'
-      ],
-      [
-        'Belal Khan',
-        'Gemini Nano-On Device AI for Next Generation Apps',
-        'https://www.linkedin.com/in/probelalkhan/',
-        'belal-khan.jpg'
-      ],
-      [
-        'Santosh Gaikar',
-        'Scaling App from Zero to Millions',
-        'https://www.linkedin.com/in/sgaikar1/',
-        'santosh-gaikar.jpg'
-      ],
-      [
-        'Saqeeb Mohammad',
-        'White-Labeling Android Apps at Scale Using Jenkins CI/CD',
-        'https://www.linkedin.com/in/msaqeeb72/',
-        'saqeeb-mohammad.jpg'
-      ]
+    talks: [
+      {
+        title: 'Owning a Legacy Android Codebase in 2025',
+        speakers: [
+          {
+            name: 'Avik Mukherjee',
+            url: 'https://www.linkedin.com/in/avikmukherjee-android-dev/',
+            photo: 'avik-mukherjee.jpg'
+          }
+        ]
+      },
+      {
+        title: 'Gemini Nano-On Device AI for Next Generation Apps',
+        speakers: [
+          {
+            name: 'Belal Khan',
+            url: 'https://www.linkedin.com/in/probelalkhan/',
+            photo: 'belal-khan.jpg'
+          }
+        ]
+      },
+      {
+        title: 'Scaling App from Zero to Millions',
+        speakers: [
+          {
+            name: 'Santosh Gaikar',
+            url: 'https://www.linkedin.com/in/sgaikar1/',
+            photo: 'santosh-gaikar.jpg'
+          }
+        ]
+      },
+      {
+        title: 'White-Labeling Android Apps at Scale Using Jenkins CI/CD',
+        speakers: [
+          {
+            name: 'Saqeeb Mohammad',
+            url: 'https://www.linkedin.com/in/msaqeeb72/',
+            photo: 'saqeeb-mohammad.jpg'
+          }
+        ]
+      }
     ],
     photos: [
       'photo-01.jpg',
@@ -99,31 +190,47 @@ const meetups = [
     map: 'https://maps.app.goo.gl/89Q7UVDMuK3XvA4b6',
     recording:
       'https://www.youtube.com/playlist?list=PLqIWi4seAoxJVrNLBRYg9PNnorzlxzj4Q',
-    speakers: [
-      [
-        'Jai Goyal',
-        'What is AOSP and How to Contribute to AOSP',
-        'https://www.linkedin.com/in/goyaljai/',
-        'jai-goyal.jpg'
-      ],
-      [
-        'Belal Khan',
-        'A Hands-on Guide to KMP and Jetpack Compose',
-        'https://www.linkedin.com/in/probelalkhan/',
-        'belal-khan.jpg'
-      ],
-      [
-        'Ankur Mudgal',
-        'Unpacking Video Streaming with Exoplayer',
-        'https://www.linkedin.com/in/ankurmudgal/',
-        'ankur-mudgal.jpg'
-      ],
-      [
-        'Ankit Kumar',
-        'Why Every App Needs a Design System',
-        'https://www.linkedin.com/in/ankitk22/',
-        'ankit-kumar.jpg'
-      ]
+    talks: [
+      {
+        title: 'What is AOSP and How to Contribute to AOSP',
+        speakers: [
+          {
+            name: 'Jai Goyal',
+            url: 'https://www.linkedin.com/in/goyaljai/',
+            photo: 'jai-goyal.jpg'
+          }
+        ]
+      },
+      {
+        title: 'A Hands-on Guide to KMP and Jetpack Compose',
+        speakers: [
+          {
+            name: 'Belal Khan',
+            url: 'https://www.linkedin.com/in/probelalkhan/',
+            photo: 'belal-khan.jpg'
+          }
+        ]
+      },
+      {
+        title: 'Unpacking Video Streaming with Exoplayer',
+        speakers: [
+          {
+            name: 'Ankur Mudgal',
+            url: 'https://www.linkedin.com/in/ankurmudgal/',
+            photo: 'ankur-mudgal.jpg'
+          }
+        ]
+      },
+      {
+        title: 'Why Every App Needs a Design System',
+        speakers: [
+          {
+            name: 'Ankit Kumar',
+            url: 'https://www.linkedin.com/in/ankitk22/',
+            photo: 'ankit-kumar.jpg'
+          }
+        ]
+      }
     ],
     photos: [
       'photo-01.jpg',
@@ -148,31 +255,47 @@ const meetups = [
     map: 'https://maps.app.goo.gl/R5w1U4ZjErgXbs637',
     recording:
       'https://youtube.com/playlist?list=PLqIWi4seAoxKoc1siRkJuCTJumuvMLqg8',
-    speakers: [
-      [
-        'Shreyas Patil',
-        'Debugging App Performance At Scale',
-        'https://www.linkedin.com/in/patil-shreyas/',
-        'shreyas-patil.jpg'
-      ],
-      [
-        'Rajesh Hadiya',
-        'Annotation Processor In Action',
-        'https://www.linkedin.com/in/hadiyarajesh/',
-        'rajesh-hadiya.jpg'
-      ],
-      [
-        'Suraj Bichkunde',
-        "Mobile At Scale: What They Don't Teach You",
-        'https://www.linkedin.com/in/suraj-bichkunde-786729178/',
-        'suraj-bichkunde.jpg'
-      ],
-      [
-        'Gaurav Thakkar',
-        'The Anatomy of a Hack in Android',
-        'https://www.linkedin.com/in/gaurav-thakkar/',
-        'gaurav-thakkar.jpg'
-      ]
+    talks: [
+      {
+        title: 'Debugging App Performance At Scale',
+        speakers: [
+          {
+            name: 'Shreyas Patil',
+            url: 'https://www.linkedin.com/in/patil-shreyas/',
+            photo: 'shreyas-patil.jpg'
+          }
+        ]
+      },
+      {
+        title: 'Annotation Processor In Action',
+        speakers: [
+          {
+            name: 'Rajesh Hadiya',
+            url: 'https://www.linkedin.com/in/hadiyarajesh/',
+            photo: 'rajesh-hadiya.jpg'
+          }
+        ]
+      },
+      {
+        title: "Mobile At Scale: What They Don't Teach You",
+        speakers: [
+          {
+            name: 'Suraj Bichkunde',
+            url: 'https://www.linkedin.com/in/suraj-bichkunde-786729178/',
+            photo: 'suraj-bichkunde.jpg'
+          }
+        ]
+      },
+      {
+        title: 'The Anatomy of a Hack in Android',
+        speakers: [
+          {
+            name: 'Gaurav Thakkar',
+            url: 'https://www.linkedin.com/in/gaurav-thakkar/',
+            photo: 'gaurav-thakkar.jpg'
+          }
+        ]
+      }
     ],
     photos: [
       'photo-01.jpg',
@@ -190,31 +313,47 @@ const meetups = [
     map: 'https://maps.app.goo.gl/R5w1U4ZjErgXbs637',
     recording:
       'https://www.youtube.com/playlist?list=PLqIWi4seAoxKIN3tdbk6Dwoyo1xdRH08v',
-    speakers: [
-      [
-        'Suraj Kulkarni',
-        'On-device LLMs on Android',
-        'https://www.linkedin.com/in/thekoolsk/',
-        'suraj-kulkarni.jpg'
-      ],
-      [
-        'Rajesh Hadiya',
-        'Compose, In the ViewModel',
-        'https://www.linkedin.com/in/hadiyarajesh/',
-        'rajesh-hadiya.jpg'
-      ],
-      [
-        'Gandharva Kumar',
-        'Measuring App Reliability',
-        '',
-        'gandharva-kumar.jpg'
-      ],
-      [
-        'Gaurav Thakkar',
-        'Kotlin Multiplatform Illusion',
-        'https://www.linkedin.com/in/gaurav-thakkar/',
-        'gaurav-thakkar.jpg'
-      ]
+    talks: [
+      {
+        title: 'On-device LLMs on Android',
+        speakers: [
+          {
+            name: 'Suraj Kulkarni',
+            url: 'https://www.linkedin.com/in/thekoolsk/',
+            photo: 'suraj-kulkarni.jpg'
+          }
+        ]
+      },
+      {
+        title: 'Compose, In the ViewModel',
+        speakers: [
+          {
+            name: 'Rajesh Hadiya',
+            url: 'https://www.linkedin.com/in/hadiyarajesh/',
+            photo: 'rajesh-hadiya.jpg'
+          }
+        ]
+      },
+      {
+        title: 'Measuring App Reliability',
+        speakers: [
+          {
+            name: 'Gandharva Kumar',
+            url: '',
+            photo: 'gandharva-kumar.jpg'
+          }
+        ]
+      },
+      {
+        title: 'Kotlin Multiplatform Illusion',
+        speakers: [
+          {
+            name: 'Gaurav Thakkar',
+            url: 'https://www.linkedin.com/in/gaurav-thakkar/',
+            photo: 'gaurav-thakkar.jpg'
+          }
+        ]
+      }
     ],
     photos: ['photo-01.jpg', 'photo-02.jpg', 'photo-03.jpg', 'photo-04.jpg']
   },
@@ -224,31 +363,47 @@ const meetups = [
     venue: 'Balaji Business Centre',
     date: '24 November, 2024 · 11 AM - 5 PM',
     map: 'https://maps.app.goo.gl/vauRW6ypNjFAc6xz6',
-    speakers: [
-      [
-        'Kailash Sharma',
-        'Server-side development with Ktor',
-        'https://www.linkedin.com/in/thekaailashsharma/',
-        'kailash-sharma.jpg'
-      ],
-      [
-        'Rajesh Hadiya',
-        'Build your first Kotlin compiler plugin',
-        'https://www.linkedin.com/in/hadiyarajesh/',
-        'rajesh-hadiya.jpg'
-      ],
-      [
-        'Gaurav Thakkar',
-        'Dependency management in multi-module project',
-        'https://www.linkedin.com/in/gaurav-thakkar/',
-        'gaurav-thakkar.jpg'
-      ],
-      [
-        'Tarun Mehta',
-        'Mobile system design',
-        'https://www.linkedin.com/in/tarun-mehta-8541016b/',
-        'tarun-mehta.jpg'
-      ]
+    talks: [
+      {
+        title: 'Server-side development with Ktor',
+        speakers: [
+          {
+            name: 'Kailash Sharma',
+            url: 'https://www.linkedin.com/in/thekaailashsharma/',
+            photo: 'kailash-sharma.jpg'
+          }
+        ]
+      },
+      {
+        title: 'Build your first Kotlin compiler plugin',
+        speakers: [
+          {
+            name: 'Rajesh Hadiya',
+            url: 'https://www.linkedin.com/in/hadiyarajesh/',
+            photo: 'rajesh-hadiya.jpg'
+          }
+        ]
+      },
+      {
+        title: 'Dependency management in multi-module project',
+        speakers: [
+          {
+            name: 'Gaurav Thakkar',
+            url: 'https://www.linkedin.com/in/gaurav-thakkar/',
+            photo: 'gaurav-thakkar.jpg'
+          }
+        ]
+      },
+      {
+        title: 'Mobile system design',
+        speakers: [
+          {
+            name: 'Tarun Mehta',
+            url: 'https://www.linkedin.com/in/tarun-mehta-8541016b/',
+            photo: 'tarun-mehta.jpg'
+          }
+        ]
+      }
     ],
     photos: [
       'photo-01.webp',

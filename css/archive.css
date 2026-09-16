@@ -192,17 +192,41 @@
 a.speaker:hover {
   background: var(--color-chip);
 }
-.speaker img {
+.speaker-avatars {
+  display: inline-flex;
   flex: 0 0 auto;
+}
+.speaker-avatars img {
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
   object-fit: cover;
   background: var(--color-chip);
 }
+/* A joint talk overlaps its headshots, ringed in the card colour so they
+   still read as two people. */
+.speaker-group .speaker-avatars img + img {
+  margin-left: -1.15rem;
+}
+.speaker-group .speaker-avatars img {
+  box-shadow: 0 0 0 2px var(--color-surface);
+}
+.speaker-group .speaker-name a {
+  text-decoration: none;
+}
+.speaker-group .speaker-name a:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+.speaker-group .speaker-name [aria-hidden] {
+  color: var(--color-faint);
+  font-weight: 400;
+}
 .speaker-name {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.35rem;
   color: var(--color-ink);
   font-weight: 600;
