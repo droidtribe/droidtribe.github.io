@@ -19,6 +19,10 @@
   --color-footer: #0f1b30;
   --color-success: #23a35a;
   --color-overlay: rgba(12, 19, 32, 0.7);
+  /* Embedded, the dialog scrim covers the whole iframe and the host page's
+     translucent header samples it. Tint towards the page's own surface so the
+     header keeps picking up what it always did. */
+  --color-embed-scrim: rgba(255, 255, 255, 0.86);
   --color-on-accent: #ffffff;
   --color-footer-text: #c9d4e6;
   --color-footer-muted: #9fadc4;
@@ -75,6 +79,7 @@
   --color-footer: #090e18;
   --color-success: #34c06e;
   --color-overlay: rgba(5, 9, 16, 0.84);
+  --color-embed-scrim: rgba(14, 21, 34, 0.88);
   --shadow-accent: 0 0.65rem 1.35rem rgba(42, 111, 228, 0.4);
   --shadow-hero: 0 30px 60px rgba(0, 0, 0, 0.55);
   --shadow-founder: 0 1.4rem 2.8rem rgba(0, 0, 0, 0.44);

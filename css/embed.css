@@ -45,6 +45,12 @@
 .is-embedded {
   --lightbox-max-h: min(calc(var(--embed-viewport-height, 100vh) * 0.7), 40rem);
 }
+/* A dark scrim across the whole frame turned the host page's sticky header
+   grey — it is translucent and samples whatever sits behind it. */
+.is-embedded .lightbox::backdrop {
+  background: var(--color-embed-scrim);
+  backdrop-filter: blur(3px);
+}
 .is-embedded .lightbox,
 .is-embedded .agenda {
   position: absolute;
