@@ -34,6 +34,7 @@
 }
 .site-header nav {
   display: flex;
+  align-items: center;
   gap: 1.35rem;
   margin-left: auto;
 }
@@ -54,6 +55,38 @@
 .theme-switcher button:hover,
 .theme-switcher button[aria-pressed='true'] {
   color: var(--color-accent);
+}
+/* Social links sit beside the nav rather than replacing it — the nav is
+   wayfinding, these are ways out. */
+.header-socials {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: 0.15rem;
+}
+.header-socials::before {
+  content: '';
+  width: 1px;
+  height: 1.15rem;
+  margin-right: 0.95rem;
+  background: var(--color-border);
+}
+.header-socials a {
+  display: grid;
+  place-items: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: var(--radius-sm);
+  color: var(--color-muted);
+}
+.header-socials a:hover {
+  color: var(--color-accent);
+  background: var(--color-chip);
+}
+.header-socials svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  fill: currentColor;
 }
 .nav-toggle {
   display: none;
@@ -123,6 +156,9 @@
       transform var(--dur-fast) var(--ease-out),
       visibility var(--dur-fast) var(--ease-out);
   }
+  .site-header nav {
+    align-items: stretch;
+  }
   .nav-is-open .site-header nav {
     visibility: visible;
     opacity: 1;
@@ -138,6 +174,23 @@
   }
   .site-header nav a:last-child {
     border-bottom: 0;
+  }
+  /* In the panel they become a row under the links, not another list item. */
+  .header-socials {
+    gap: 0.5rem;
+    margin: var(--space-3) 0 0;
+  }
+  .header-socials::before {
+    display: none;
+  }
+  .header-socials a {
+    width: 2.4rem;
+    height: 2.4rem;
+    border: 1px solid var(--color-border);
+  }
+  .header-socials svg {
+    width: 1.05rem;
+    height: 1.05rem;
   }
 }
 @media (max-width: 34rem) {

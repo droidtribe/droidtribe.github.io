@@ -9,6 +9,8 @@ if (lightbox) {
   const dots = lightbox.querySelector('#lightbox-dots');
   const prev = lightbox.querySelector('[data-lightbox-prev]');
   const next = lightbox.querySelector('[data-lightbox-next]');
+  const save = lightbox.querySelector('#lightbox-download');
+  if (save) save.innerHTML = icons.download;
   let gallery = [];
   let active = 0;
 
@@ -16,6 +18,14 @@ if (lightbox) {
     const item = gallery[active];
     image.src = item.src;
     image.alt = item.alt;
+    if (save) {
+      save.href = item.src;
+      // Saves as droidtribe-meetup-7-photo-03.jpg rather than photo-03.jpg.
+      save.setAttribute(
+        'download',
+        `droidtribe-${item.src.split('/').slice(-2).join('-')}`
+      );
+    }
     count.textContent = `${active + 1} / ${gallery.length}`;
     dots.innerHTML = gallery
       .map(

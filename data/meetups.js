@@ -2,15 +2,20 @@
    speaker headshots in assets/speakers/. Hero counts and the archive
    subheading are derived from this list, so adding an entry is enough.
 
-   A talk has one title and one or more speakers — a session given by two
-   people is one talk, not two. `recording` is a playlist URL, the string
-   'soon' while the videos are still being edited, or left out entirely. */
+   `on` is the date the site reasons about — anything in the future is an
+   upcoming meetup, shown with its RSVP link and left out of the counts.
+   `time` is the label beside it. A talk has one title and one or more
+   speakers: a session given by two people is one talk, not two.
+   `recording` is a playlist URL, the string 'soon' while the videos are
+   still being edited, or left out. `agenda` is optional; its `talk` field
+   indexes into `talks` so nothing is written twice. */
 const meetups = [
   {
     number: 7,
     city: 'Bengaluru',
     venue: 'PhonePe',
-    date: '12 September, 2026 · 11 AM - 5 PM',
+    on: '2026-09-12',
+    time: '11 AM - 5 PM',
     map: 'https://maps.app.goo.gl/MDgH4NnWY6E51xfP9',
     recording: 'soon',
     talks: [
@@ -60,13 +65,50 @@ const meetups = [
         ]
       }
     ],
-    photos: []
+    agenda: [
+      {
+        start: '11:00',
+        end: '11:15',
+        title: 'Introduction & Welcome',
+        by: 'Organisers'
+      },
+      { start: '11:15', end: '12:00', talk: 0 },
+      { start: '12:00', end: '12:45', talk: 1 },
+      {
+        start: '12:45',
+        end: '14:00',
+        title: 'Lunch & Networking',
+        kind: 'break'
+      },
+      { start: '14:00', end: '14:30', title: 'Quiz & Rewards', kind: 'break' },
+      { start: '14:30', end: '15:15', talk: 2 },
+      { start: '15:15', end: '15:45', title: 'Lightning talks' },
+      { start: '15:45', end: '16:30', talk: 3 },
+      {
+        start: '16:30',
+        end: '17:00',
+        title: 'Panel Discussion',
+        by: 'Organisers & Speakers'
+      }
+    ],
+    photos: [
+      'photo-01.jpg',
+      'photo-02.jpg',
+      'photo-03.jpg',
+      'photo-04.jpg',
+      'photo-05.jpg',
+      'photo-06.jpg',
+      'photo-07.jpg',
+      'photo-08.jpg',
+      'photo-09.jpg'
+    ]
   },
   {
     number: 6,
     city: 'Pune',
     venue: 'Technogise',
-    date: '22 February, 2026 · 11 AM - 5 PM',
+    on: '2026-02-22',
+    time: '11 AM - 5 PM',
     map: 'https://maps.app.goo.gl/HVFnEuwW4NTJWAXt8',
     recording:
       'https://youtube.com/playlist?list=PLqIWi4seAoxJ-MHJZiGyWxb7CiPpriHn9',
@@ -124,7 +166,8 @@ const meetups = [
     number: 5,
     city: 'Mumbai',
     venue: 'CleverTap',
-    date: '29 November, 2025 · 11 AM - 5 PM',
+    on: '2025-11-29',
+    time: '11 AM - 5 PM',
     map: 'https://maps.app.goo.gl/75568rBuHnHNr2GT9',
     recording:
       'https://youtube.com/playlist?list=PLqIWi4seAoxLoEl9_CtCNaJEijxAOI8Ri',
@@ -186,7 +229,8 @@ const meetups = [
     number: 4,
     city: 'Bengaluru',
     venue: 'InMobi',
-    date: '10 October, 2025 · 11 AM - 5 PM',
+    on: '2025-10-10',
+    time: '11 AM - 5 PM',
     map: 'https://maps.app.goo.gl/89Q7UVDMuK3XvA4b6',
     recording:
       'https://www.youtube.com/playlist?list=PLqIWi4seAoxJVrNLBRYg9PNnorzlxzj4Q',
@@ -251,7 +295,8 @@ const meetups = [
     number: 3,
     city: 'Pune',
     venue: 'Technogise',
-    date: '2 August, 2025 · 11 AM - 5 PM',
+    on: '2025-08-02',
+    time: '11 AM - 5 PM',
     map: 'https://maps.app.goo.gl/R5w1U4ZjErgXbs637',
     recording:
       'https://youtube.com/playlist?list=PLqIWi4seAoxKoc1siRkJuCTJumuvMLqg8',
@@ -309,7 +354,8 @@ const meetups = [
     number: 2,
     city: 'Pune',
     venue: 'Technogise',
-    date: '9 March, 2025 · 11 AM - 5 PM',
+    on: '2025-03-09',
+    time: '11 AM - 5 PM',
     map: 'https://maps.app.goo.gl/R5w1U4ZjErgXbs637',
     recording:
       'https://www.youtube.com/playlist?list=PLqIWi4seAoxKIN3tdbk6Dwoyo1xdRH08v',
@@ -361,7 +407,8 @@ const meetups = [
     number: 1,
     city: 'Pune',
     venue: 'Balaji Business Centre',
-    date: '24 November, 2024 · 11 AM - 5 PM',
+    on: '2024-11-24',
+    time: '11 AM - 5 PM',
     map: 'https://maps.app.goo.gl/vauRW6ypNjFAc6xz6',
     talks: [
       {

@@ -41,6 +41,7 @@ h1 em {
   margin: var(--space-6) 0 0;
   color: var(--color-muted);
   font-size: clamp(0.95rem, 1.3vw, 1.12rem);
+  font-weight: 600;
 }
 .stats {
   display: flex;

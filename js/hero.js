@@ -3,10 +3,13 @@
 const heroStats = document.querySelector('#hero-stats');
 
 if (heroStats) {
-  const cities = new Set(meetups.map((meetup) => meetup.city));
-  const talks = meetups.reduce((total, m) => total + m.talks.length, 0);
+  // An upcoming meetup has not happened yet, so it does not count towards what
+  // the community has done so far.
+  const held = meetups.filter((meetup) => !isUpcoming(meetup));
+  const cities = new Set(held.map((meetup) => meetup.city));
+  const talks = held.reduce((total, m) => total + m.talks.length, 0);
   const stats = [
-    [meetups.length, 'Meetups'],
+    [held.length, 'Meetups'],
     [cities.size, 'Cities'],
     [talks, 'Talks']
   ];

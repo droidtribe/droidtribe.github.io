@@ -30,7 +30,8 @@ from the other.
   number: 8,
   city: 'Pune',
   venue: 'Venue name',
-  date: '1 January, 2027 · 11 AM - 5 PM',
+  on: '2027-01-01',
+  time: '11 AM - 5 PM',
   map: 'https://maps.app.goo.gl/…',
   recording: 'https://youtube.com/playlist?list=…',
   talks: [
@@ -55,6 +56,9 @@ themselves.
 
 A few details worth knowing:
 
+- **`on` is the date the site reasons about**, `time` is only a label. Keep
+  `on` in `YYYY-MM-DD` — it decides the display date and whether the meetup is
+  still upcoming.
 - **A talk can have more than one speaker.** Put both in the same `speakers`
   array and it stays one talk in the counts, rendered with their headshots
   overlapped and each name linked separately.
@@ -65,6 +69,52 @@ A few details worth knowing:
   is skipped until there is at least one.
 - A speaker's `url` is optional — leave it out and the name renders unlinked.
 - The name matching `HOST` in `js/archive.js` gets the "Host" chip.
+
+## Announcing a meetup before it happens
+
+Add it like any other, with `on` set to a future date and an `rsvp` link:
+
+```js
+{
+  number: 8,
+  city: 'Pune',
+  venue: 'Venue name',
+  on: '2027-01-01',
+  time: '11 AM - 5 PM',
+  map: 'https://maps.app.goo.gl/…',
+  rsvp: 'https://lu.ma/…',
+  talks: [ … ],
+  photos: []
+}
+```
+
+While `on` is in the future the card carries an "Upcoming" chip, labels its
+talks "What's on", shows the RSVP button, and is left out of the hero counts
+and the "N gatherings" line — it has not happened yet. Nothing needs switching
+off afterwards: the day it passes, it counts.
+
+## Adding the agenda
+
+Optional, per meetup. Rows point at `talks` by index so a title and its
+speakers are never written twice:
+
+```js
+agenda: [
+  {
+    start: '11:00',
+    end: '11:15',
+    title: 'Introduction & Welcome',
+    by: 'Organisers'
+  },
+  { start: '11:15', end: '12:00', talk: 0 },
+  { start: '12:45', end: '14:00', title: 'Lunch & Networking', kind: 'break' }
+];
+```
+
+Times are 24-hour; the site formats them and works out each duration. A row
+with `talk` pulls the title, speakers and headshots from that entry. A row
+without one is a standalone item — add `kind: 'break'` to tint it. Once a
+meetup has an agenda, its card offers "See the agenda".
 
 ## Adding or changing an organiser
 
@@ -145,6 +195,13 @@ favicon-32.png                32px
 Everything except the original is generated from it. If the logo changes,
 replace the original and regenerate the rest: crop the mark out of the lockup
 (excluding the wordmark) for `mark.png`, then resize that down for the icons.
+
+## The photo viewer
+
+Photos open in a viewer with a download button, which saves the file the site
+serves — so the copy in `assets/meetup-<n>/` is the copy people get. Around
+2048px on the long edge is the balance to aim for: sharp on a high-density
+screen and worth downloading, without the multi-megabyte camera originals.
 
 ## Content-only mode
 

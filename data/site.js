@@ -9,7 +9,11 @@ const site = {
   // Rendered into the footer, in this order. `icon` names an entry in the icon
   // set at the top of js/site.js.
   social: [
-    { label: 'GitHub', icon: 'github', url: 'https://github.com/droidtribe' },
+    {
+      label: 'Instagram',
+      icon: 'instagram',
+      url: 'https://www.instagram.com/droidtribe_community/'
+    },
     {
       label: 'LinkedIn',
       icon: 'linkedin',

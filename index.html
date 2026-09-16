@@ -22,16 +22,16 @@
       href="assets/brand/mark.png"
     />
     <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png" />
-    <link rel="stylesheet" href="css/tokens.css?v=20260826-0900" />
-    <link rel="stylesheet" href="css/base.css?v=20260826-0900" />
-    <link rel="stylesheet" href="css/header.css?v=20260826-0900" />
-    <link rel="stylesheet" href="css/hero.css?v=20260826-0900" />
-    <link rel="stylesheet" href="css/about.css?v=20260826-0900" />
-    <link rel="stylesheet" href="css/archive.css?v=20260826-0900" />
-    <link rel="stylesheet" href="css/lightbox.css?v=20260826-0900" />
-    <link rel="stylesheet" href="css/footer.css?v=20260826-0900" />
-    <link rel="stylesheet" href="css/legal.css?v=20260826-0900" />
-    <link rel="stylesheet" href="css/embed.css?v=20260826-0900" />
+    <link rel="stylesheet" href="css/tokens.css?v=20260916-1300" />
+    <link rel="stylesheet" href="css/base.css?v=20260916-1300" />
+    <link rel="stylesheet" href="css/header.css?v=20260916-1300" />
+    <link rel="stylesheet" href="css/hero.css?v=20260916-1300" />
+    <link rel="stylesheet" href="css/about.css?v=20260916-1300" />
+    <link rel="stylesheet" href="css/archive.css?v=20260916-1300" />
+    <link rel="stylesheet" href="css/lightbox.css?v=20260916-1300" />
+    <link rel="stylesheet" href="css/footer.css?v=20260916-1300" />
+    <link rel="stylesheet" href="css/legal.css?v=20260916-1300" />
+    <link rel="stylesheet" href="css/embed.css?v=20260916-1300" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -73,9 +73,8 @@
         </svg>
       </button>
       <nav id="site-nav" aria-label="Primary">
-        <a href="#meetups">Meetups</a
-        ><a data-site-youtube target="_blank" rel="noreferrer">YouTube</a
-        ><a href="#about">About</a>
+        <a href="#meetups">Meetups</a><a href="#about">About</a>
+        <span class="header-socials" data-site-socials></span>
       </nav>
     </header>
 
@@ -145,8 +144,7 @@
       <section class="archive" id="meetups" aria-labelledby="meetups-title">
         <div class="shell">
           <div class="section-heading">
-            <p class="eyebrow">Archive</p>
-            <h2 id="meetups-title">Meetups, shared</h2>
+            <h2 id="meetups-title">Our Meetups</h2>
             <p id="archive-summary"></p>
           </div>
           <!-- Timeline comes from data/meetups.js via js/archive.js -->
@@ -235,14 +233,22 @@
     <dialog class="lightbox" id="lightbox" aria-labelledby="lightbox-title">
       <div class="lightbox-head">
         <p id="lightbox-title">Meetup photos</p>
-        <button
-          type="button"
-          class="icon-button"
-          data-close-lightbox
-          aria-label="Close photo viewer"
-        >
-          ×
-        </button>
+        <span class="lightbox-controls">
+          <a
+            class="icon-button"
+            id="lightbox-download"
+            download
+            aria-label="Download this photo"
+          ></a>
+          <button
+            type="button"
+            class="icon-button"
+            data-close-lightbox
+            aria-label="Close photo viewer"
+          >
+            ×
+          </button>
+        </span>
       </div>
       <div class="lightbox-stage">
         <img id="lightbox-image" alt="" />
@@ -295,17 +301,32 @@
         aria-live="polite"
       ></p>
     </dialog>
-    <script src="data/site.js?v=20260826-0900"></script>
-    <script src="data/organizers.js?v=20260826-0900"></script>
-    <script src="data/meetups.js?v=20260826-0900"></script>
-    <script src="js/env.js?v=20260826-0900"></script>
-    <script src="js/site.js?v=20260826-0900"></script>
-    <script src="js/theme.js?v=20260826-0900"></script>
-    <script src="js/nav.js?v=20260826-0900"></script>
-    <script src="js/hero.js?v=20260826-0900"></script>
-    <script src="js/organizers.js?v=20260826-0900"></script>
-    <script src="js/archive.js?v=20260826-0900"></script>
-    <script src="js/lightbox.js?v=20260826-0900"></script>
-    <script src="js/embed.js?v=20260826-0900"></script>
+    <dialog class="lightbox agenda" id="agenda" aria-labelledby="agenda-title">
+      <div class="lightbox-head">
+        <p id="agenda-title">Agenda</p>
+        <button
+          type="button"
+          class="icon-button"
+          data-close-agenda
+          aria-label="Close agenda"
+        >
+          ×
+        </button>
+      </div>
+      <div class="agenda-body" id="agenda-body"></div>
+    </dialog>
+    <script src="data/site.js?v=20260916-1300"></script>
+    <script src="data/organizers.js?v=20260916-1300"></script>
+    <script src="data/meetups.js?v=20260916-1300"></script>
+    <script src="js/env.js?v=20260916-1300"></script>
+    <script src="js/site.js?v=20260916-1300"></script>
+    <script src="js/theme.js?v=20260916-1300"></script>
+    <script src="js/nav.js?v=20260916-1300"></script>
+    <script src="js/hero.js?v=20260916-1300"></script>
+    <script src="js/organizers.js?v=20260916-1300"></script>
+    <script src="js/archive.js?v=20260916-1300"></script>
+    <script src="js/lightbox.js?v=20260916-1300"></script>
+    <script src="js/agenda.js?v=20260916-1300"></script>
+    <script src="js/embed.js?v=20260916-1300"></script>
   </body>
 </html>

@@ -36,11 +36,10 @@ if (meetupList) {
     return `<div class="speaker${solo ? '' : ' speaker-group'}">${body}</div>`;
   };
 
-  // Split on the middot so a narrow card breaks between day and time,
+  // Day and time are separate parts so a narrow card breaks between them,
   // never in the middle of "11 AM - 5 PM".
-  const dateMarkup = (value) =>
-    value
-      .split(' · ')
+  const dateMarkup = (meetup) =>
+    [longDate(meetup.on), meetup.time]
       .map((part) => `<span class="meetup-date-part">${part}</span>`)
       .join('<span class="meetup-date-sep" aria-hidden="true">·</span>');
 
@@ -52,17 +51,33 @@ if (meetupList) {
 
   const meetupMarkup = (meetup, index) => {
     const open = index === 0;
+    const upcoming = isUpcoming(meetup);
     const recording =
       meetup.recording === 'soon'
         ? `<a class="recording-link" href="${site.youtube}" target="_blank" rel="noreferrer">${icons.recording}<span>Recordings coming soon on YouTube</span></a>`
         : meetup.recording
           ? `<a class="recording-link" href="${meetup.recording}" target="_blank" rel="noreferrer">${icons.recording}<span>Watch recordings</span></a>`
           : '';
-    // A meetup can sit here before its photos are in.
+    const rsvp =
+      upcoming && meetup.rsvp
+        ? `<a class="rsvp-link" href="${meetup.rsvp}" target="_blank" rel="noreferrer">Reserve a seat <span aria-hidden="true">→</span></a>`
+        : '';
+    const agenda = meetup.agenda?.length
+      ? `<button class="recording-link" type="button" data-agenda="${meetup.number}">${icons.agenda}<span>See the agenda</span></button>`
+      : '';
+    const actions =
+      rsvp || agenda || recording
+        ? `<div class="panel-actions">${rsvp}${agenda}${recording}</div>`
+        : '';
+    // A meetup can sit here before its photos are in — and an upcoming one has none.
     const photos = meetup.photos?.length
       ? `<div><p class="panel-label">Photos</p><div class="photo-strip">${meetup.photos.map((photo, i) => photoMarkup(photo, meetup, i)).join('')}</div></div>`
       : '';
-    return `<article class="meetup${open ? ' is-open' : ''}"><span class="meetup-mark" aria-hidden="true">${meetup.number}</span><div class="meetup-card"><button class="meetup-trigger" type="button" aria-expanded="${open}" aria-controls="meetup-${meetup.number}"><span class="meetup-title-row"><span class="meetup-title">Meetup #${meetup.number}</span><span class="city-chip">${icons.mapPin} ${meetup.city}</span></span><span class="meetup-meta"><span class="meetup-date">${dateMarkup(meetup.date)}</span><span class="chevron" aria-hidden="true">⌄</span></span></button><div class="venue">${icons.mapPin}<span class="venue-label">Venue</span><a href="${meetup.map}" target="_blank" rel="noreferrer">${meetup.venue}</a></div><div class="meetup-panel" id="meetup-${meetup.number}"${open ? '' : ' hidden'}><div><p class="panel-label">Talks</p><div class="speaker-grid">${meetup.talks.map(talkMarkup).join('')}</div></div>${photos}${recording}</div></div></article>`;
+    const talksLabel = upcoming ? 'What&rsquo;s on' : 'Talks';
+    const upcomingChip = upcoming
+      ? '<span class="city-chip upcoming-chip">Upcoming</span>'
+      : '';
+    return `<article class="meetup${open ? ' is-open' : ''}${upcoming ? ' is-upcoming' : ''}"><span class="meetup-mark" aria-hidden="true">${meetup.number}</span><div class="meetup-card"><button class="meetup-trigger" type="button" aria-expanded="${open}" aria-controls="meetup-${meetup.number}"><span class="meetup-title-row"><span class="meetup-title">Meetup #${meetup.number}</span>${upcomingChip}<span class="city-chip">${icons.mapPin} ${meetup.city}</span></span><span class="meetup-meta"><span class="meetup-date">${dateMarkup(meetup)}</span><span class="chevron" aria-hidden="true">${icons.chevron}</span></span></button><div class="venue">${icons.mapPin}<span class="venue-label">Venue</span><a href="${meetup.map}" target="_blank" rel="noreferrer">${meetup.venue}</a></div><div class="meetup-panel" id="meetup-${meetup.number}"${open ? '' : ' hidden'}><div><p class="panel-label">${talksLabel}</p><div class="speaker-grid">${meetup.talks.map(talkMarkup).join('')}</div></div>${photos}${actions}</div></div></article>`;
   };
 
   meetupList.innerHTML = meetups.map(meetupMarkup).join('');
@@ -81,9 +96,10 @@ if (meetupList) {
       'Nine',
       'Ten'
     ];
-    const count = words[meetups.length - 1] || meetups.length;
+    const held = meetups.filter((meetup) => !isUpcoming(meetup));
+    const count = words[held.length - 1] || held.length;
     // Oldest first, so cities read in the order the community reached them.
-    const cities = [...new Set([...meetups].reverse().map((m) => m.city))];
+    const cities = [...new Set([...held].reverse().map((m) => m.city))];
     const list =
       cities.length > 1
         ? `${cities.slice(0, -1).join(', ')}, and ${cities[cities.length - 1]}`

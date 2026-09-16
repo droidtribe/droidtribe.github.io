@@ -9,7 +9,7 @@
   margin-bottom: var(--space-10);
 }
 .section-heading h2 {
-  margin-top: var(--space-3);
+  margin-top: 0;
 }
 .section-heading > p:last-child {
   margin: var(--space-4) 0 0;
@@ -118,10 +118,16 @@
   white-space: nowrap;
 }
 .chevron {
+  display: grid;
+  place-items: center;
   color: var(--color-faint);
   transition:
     transform var(--dur-base) var(--ease-out),
     color var(--dur-base) var(--ease-out);
+}
+.chevron svg {
+  width: 0.95rem;
+  height: 0.95rem;
 }
 .meetup.is-open .chevron {
   transform: rotate(180deg);
@@ -288,16 +294,55 @@ a.speaker:hover {
   width: 0.9375rem;
   height: 0.9375rem;
 }
+.panel-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-divider);
+}
 .recording-link {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  width: 100%;
-  padding-top: var(--space-5);
-  border-top: 1px solid var(--color-divider);
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: var(--color-accent);
+  font: inherit;
   font-weight: 600;
   text-decoration: none;
+  cursor: pointer;
+}
+.recording-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+}
+.rsvp-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: auto;
+  padding: 0.62rem 1.05rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  box-shadow: var(--shadow-accent);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background var(--dur-base) var(--ease-out);
+}
+.rsvp-link:hover {
+  background: var(--color-accent-deep);
+}
+.upcoming-chip {
+  color: var(--color-on-accent);
+  border-color: transparent;
+  background: var(--color-accent);
+}
+.meetup.is-upcoming .meetup-mark {
+  background: var(--color-accent);
 }
 .recording-icon {
   flex: 0 0 auto;
