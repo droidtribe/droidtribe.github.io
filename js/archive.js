@@ -62,9 +62,12 @@ if (meetupList) {
       upcoming && meetup.rsvp
         ? `<a class="rsvp-link" href="${meetup.rsvp}" target="_blank" rel="noreferrer">Reserve a seat <span aria-hidden="true">→</span></a>`
         : '';
-    const agenda = meetup.agenda?.length
-      ? `<button class="recording-link" type="button" data-agenda="${meetup.number}">${icons.agenda}<span>See the agenda</span></button>`
-      : '';
+    // Only worth offering before the day. Once a meetup is done its talk list
+    // says everything the agenda would, and the recordings say it better.
+    const agenda =
+      upcoming && meetup.agenda?.length
+        ? `<button class="recording-link" type="button" data-agenda="${meetup.number}">${icons.agenda}<span>See the agenda</span></button>`
+        : '';
     const actions =
       rsvp || agenda || recording
         ? `<div class="panel-actions">${rsvp}${agenda}${recording}</div>`

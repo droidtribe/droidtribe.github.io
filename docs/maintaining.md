@@ -113,8 +113,13 @@ agenda: [
 
 Times are 24-hour; the site formats them and works out each duration. A row
 with `talk` pulls the title, speakers and headshots from that entry. A row
-without one is a standalone item — add `kind: 'break'` to tint it. Once a
-meetup has an agenda, its card offers "See the agenda".
+without one is a standalone item — add `kind: 'break'` to tint it.
+
+**The "See the agenda" button only appears while the meetup is upcoming.** Once
+the day passes, the talk list already says who spoke about what and the
+recordings say it better, so the button retires itself. An agenda left on a past
+meetup is harmless — it simply stops being offered, and meetup #7 keeps its own
+as a worked example to copy.
 
 ## Adding or changing an organiser
 
