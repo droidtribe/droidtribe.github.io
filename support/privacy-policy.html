@@ -2,6 +2,25 @@
 <html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
+    <link rel="canonical" href="https://droidtribe.in/support/privacy-policy" />
+    <script>
+      /* DroidTribe has moved to droidtribe.in, so visitors are sent there. The
+         copy embedded on hadiyarajesh.com (?embed=1, or any frame) stays put:
+         droidtribe.in refuses to be framed, so redirecting it would blank that
+         page. */
+      (function () {
+        var embedded = new URLSearchParams(location.search).get('embed') === '1';
+        try {
+          embedded = embedded || window.self !== window.top;
+        } catch (e) {
+          embedded = true;
+        }
+        if (embedded) return;
+        var target = 'https://droidtribe.in/support/privacy-policy';
+        location.replace(target);
+      })();
+    </script>
+    <noscript><meta http-equiv="refresh" content="0; url=https://droidtribe.in/support/privacy-policy" /></noscript>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"

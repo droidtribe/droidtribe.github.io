@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="canonical" href="https://droidtribe.in/" />
+    <script>
+      /* DroidTribe has moved to droidtribe.in, so visitors are sent there. The
+         copy embedded on hadiyarajesh.com (?embed=1, or any frame) stays put:
+         droidtribe.in refuses to be framed, so redirecting it would blank that
+         page. */
+      (function () {
+        var embedded = new URLSearchParams(location.search).get('embed') === '1';
+        try {
+          embedded = embedded || window.self !== window.top;
+        } catch (e) {
+          embedded = true;
+        }
+        if (embedded) return;
+        var target = 'https://droidtribe.in/';
+        location.replace(target);
+      })();
+    </script>
+    <noscript><meta http-equiv="refresh" content="0; url=https://droidtribe.in/" /></noscript>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>DroidTribe has moved</title>
+  </head>
+  <body>
+    <p>DroidTribe has moved to <a href="https://droidtribe.in/">droidtribe.in</a>.</p>
+  </body>
+</html>
